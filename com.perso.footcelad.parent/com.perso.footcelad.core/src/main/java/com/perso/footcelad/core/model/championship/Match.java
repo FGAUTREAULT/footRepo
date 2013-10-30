@@ -18,8 +18,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.validator.constraints.br.TituloEleitoral;
-
 import com.perso.footcelad.core.model.enums.MatchType;
 import com.perso.footcelad.core.model.user.Player;
 
