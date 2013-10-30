@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,6 +22,7 @@ import com.perso.footcelad.core.model.enums.PlayerType;
  * 
  */
 @Entity
+@DiscriminatorValue("Player")
 public class Player extends User {
 
 	private Long id;

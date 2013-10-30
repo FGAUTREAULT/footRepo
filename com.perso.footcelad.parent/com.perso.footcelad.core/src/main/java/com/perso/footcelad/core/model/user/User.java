@@ -3,8 +3,12 @@ package com.perso.footcelad.core.model.user;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.swing.ImageIcon;
 
 /**
@@ -13,6 +17,8 @@ import javax.swing.ImageIcon;
  * 
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
 public class User implements Serializable {
 
 	private Long id;
@@ -26,7 +32,7 @@ public class User implements Serializable {
 	}
 
 	@Id
-	@Column(name="USER_ID")
+	@Column(name = "USER_ID")
 	public Long getId() {
 		return id;
 	}
@@ -53,7 +59,7 @@ public class User implements Serializable {
 		this.userFamilyName = familyName;
 	}
 
-	@Column(name="FAMILY_NAME",nullable=false)
+	@Column(name = "FAMILY_NAME", nullable = false)
 	public String getUserFamilyName() {
 		return userFamilyName;
 	}
@@ -62,7 +68,7 @@ public class User implements Serializable {
 		this.userFamilyName = userFamilyName;
 	}
 
-	@Column(name="FIRST_NAME",nullable=false)
+	@Column(name = "FIRST_NAME", nullable = false)
 	public String getUserFirstName() {
 		return userFirstName;
 	}
@@ -79,7 +85,7 @@ public class User implements Serializable {
 		this.avatar = avatar;
 	}
 
-	@Column(name="TEL")
+	@Column(name = "TEL")
 	public String getTel() {
 		return tel;
 	}
@@ -88,7 +94,7 @@ public class User implements Serializable {
 		this.tel = tel;
 	}
 
-	@Column(name="MAIL",nullable=false)
+	@Column(name = "MAIL", nullable = false)
 	public String getMail() {
 		return mail;
 	}
