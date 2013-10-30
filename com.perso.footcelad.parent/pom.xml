@@ -10,4 +10,13 @@
   	<module>com.perso.footcelad.core</module>
   	<module>com.perso.footcelad.hmi</module>
   </modules>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>junit</groupId>
+  			<artifactId>junit</artifactId>
+  			<version>4.11</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>

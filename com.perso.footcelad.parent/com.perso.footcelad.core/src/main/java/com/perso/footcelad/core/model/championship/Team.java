@@ -7,6 +7,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import com.perso.footcelad.core.model.user.Manager;
 import com.perso.footcelad.core.model.user.Player;
 
@@ -14,6 +20,7 @@ import com.perso.footcelad.core.model.user.Player;
  * @author ktf01464
  * 
  */
+@Entity
 public class Team implements Serializable {
 
 	private Long id;
@@ -24,6 +31,8 @@ public class Team implements Serializable {
 	public Team() {
 	}
 
+	@Id
+	@Column(name="TEAM_ID")
 	public Long getId() {
 		return id;
 	}
@@ -32,6 +41,7 @@ public class Team implements Serializable {
 		this.id = id;
 	}
 
+	@Column(name="TEAM_NAME", nullable=false)
 	public String getTeamName() {
 		return teamName;
 	}
@@ -40,6 +50,7 @@ public class Team implements Serializable {
 		this.teamName = teamName;
 	}
 
+	@OneToMany
 	public List<Player> getPlayers() {
 		if (players == null) {
 			players = new ArrayList<Player>();
@@ -51,6 +62,7 @@ public class Team implements Serializable {
 		this.players = players;
 	}
 
+	@OneToOne
 	public Manager getManager() {
 		return manager;
 	}

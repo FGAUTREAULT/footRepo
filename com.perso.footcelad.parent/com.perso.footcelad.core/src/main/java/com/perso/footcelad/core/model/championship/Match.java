@@ -8,6 +8,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.br.TituloEleitoral;
+
 import com.perso.footcelad.core.model.enums.MatchType;
 import com.perso.footcelad.core.model.user.Player;
 
@@ -16,6 +28,7 @@ import com.perso.footcelad.core.model.user.Player;
  * @author ktf01464
  * 
  */
+@Entity
 public class Match implements Serializable {
 
 	private Long id;
@@ -31,6 +44,8 @@ public class Match implements Serializable {
 	public Match() {
 	}
 
+	@Id
+	@Column(name="MATCH_ID")
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +54,8 @@ public class Match implements Serializable {
 		this.id = id;
 	}
 
+	@OneToOne
+	@Column(name="TEAM_A",nullable=false)
 	public Team getTeamA() {
 		return teamA;
 	}
@@ -47,6 +64,8 @@ public class Match implements Serializable {
 		this.teamA = teamA;
 	}
 
+	@OneToOne
+	@Column(name="TEAM_B",nullable=false)
 	public Team getTeamB() {
 		return teamB;
 	}
@@ -55,6 +74,8 @@ public class Match implements Serializable {
 		this.teamB = teamB;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="MATCH_DATE",nullable=false)
 	public Date getDate() {
 		return date;
 	}
@@ -63,6 +84,8 @@ public class Match implements Serializable {
 		this.date = date;
 	}
 
+	@Column(name="MATCH_TYPE")
+	@Enumerated(EnumType.STRING)
 	public MatchType getMatchType() {
 		if (matchType == null)
 			return MatchType.JOURNEY;
@@ -73,6 +96,7 @@ public class Match implements Serializable {
 		this.matchType = matchType;
 	}
 
+	@OneToOne
 	public Score getScore() {
 		if (score == null) {
 			score = new Score();
@@ -84,6 +108,7 @@ public class Match implements Serializable {
 		this.score = score;
 	}
 
+	@Column(name="JOURNEY_NB", nullable=false,unique=true)
 	public int getJourneyNumber() {
 		return journeyNumber;
 	}
@@ -92,6 +117,8 @@ public class Match implements Serializable {
 		this.journeyNumber = journeyNumber;
 	}
 
+	@OneToOne
+	@Column(name="STADIUM",nullable=false)
 	public Stadium getStadium() {
 		return stadium;
 	}
@@ -100,6 +127,7 @@ public class Match implements Serializable {
 		this.stadium = stadium;
 	}
 
+	@OneToMany
 	public List<Player> getPlayers() {
 		if (players == null) {
 			players = new ArrayList<Player>();
@@ -116,7 +144,7 @@ public class Match implements Serializable {
 	 * 
 	 * @return
 	 */
-	public String getMatchName() {
+	private String getMatchName() {
 		String name;
 		if (MatchType.AMICAL.equals(matchType))
 			name = matchType + ": " + teamA.getTeamName() + " VS "

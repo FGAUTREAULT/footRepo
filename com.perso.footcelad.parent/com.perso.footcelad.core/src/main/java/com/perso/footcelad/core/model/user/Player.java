@@ -6,6 +6,13 @@ package com.perso.footcelad.core.model.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import com.perso.footcelad.core.model.enums.PlayerType;
 
 
@@ -13,6 +20,7 @@ import com.perso.footcelad.core.model.enums.PlayerType;
  * @author ktf01464
  * 
  */
+@Entity
 public class Player extends User {
 
 	private Long id;
@@ -28,6 +36,8 @@ public class Player extends User {
 	public Player() {
 	}
 
+	@Id
+	@Column(name="PLAYER_ID", nullable=false)
 	public Long getId() {
 		return id;
 	}
@@ -36,6 +46,8 @@ public class Player extends User {
 		this.id = id;
 	}
 
+	@Column(name="PLAYER_TYPE", nullable=false)
+	@Enumerated(EnumType.STRING)
 	public PlayerType getPlayerType() {
 		return playerType;
 	}
@@ -44,6 +56,7 @@ public class Player extends User {
 		this.playerType = playerType;
 	}
 
+	@Column(name="NB_GOAL")
 	public int getNbGoal() {
 		return nbGoal;
 	}
@@ -52,6 +65,7 @@ public class Player extends User {
 		this.nbGoal = nbGoal;
 	}
 
+	@Column(name="NB_PASS")
 	public int getNbPass() {
 		return nbPass;
 	}
@@ -60,6 +74,7 @@ public class Player extends User {
 		this.nbPass = nbPass;
 	}
 
+	@Column(name="LICENCE_NUMBER")
 	public int getLicenceNumber() {
 		return licenceNumber;
 	}
@@ -68,6 +83,7 @@ public class Player extends User {
 		this.licenceNumber = licenceNumber;
 	}
 
+	@Column(name="NB_WASH")
 	public int getNbWash() {
 		return nbWash;
 	}
@@ -76,6 +92,7 @@ public class Player extends User {
 		this.nbWash = nbWash;
 	}
 
+	@OneToMany
 	public List<Disponibility> getDisponibilities() {
 		if (disponibilities == null) {
 			disponibilities = new ArrayList<Disponibility>();
@@ -87,6 +104,8 @@ public class Player extends User {
 		this.disponibilities = disponibilities;
 	}
 
+	@Column(name="PREFERED_POS_A",nullable=false)
+	@Enumerated(EnumType.STRING)
 	public PlayerType getPreferredPositionA() {
 		if (preferredPositionA == null) {
 			preferredPositionA = PlayerType.NONE;
@@ -98,6 +117,8 @@ public class Player extends User {
 		this.preferredPositionA = preferredPositionA;
 	}
 
+	@Column(name="PREFERED_POS_B",nullable=false)
+	@Enumerated(EnumType.STRING)
 	public PlayerType getPreferredPositionB() {
 		if (preferredPositionB == null) {
 			preferredPositionB = PlayerType.NONE;

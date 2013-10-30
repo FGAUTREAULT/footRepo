@@ -55,6 +55,8 @@ public class Score implements Serializable {
 		this.scoreTeamB = scoreTeamB;
 	}
 	
-	
+	public String getScoreText() {
+		return scoreTeamA + " - " + scoreTeamB;
+	}
 	
 }

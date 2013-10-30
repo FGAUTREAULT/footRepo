@@ -2,6 +2,14 @@ package com.perso.footcelad.core.model.user;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import com.perso.footcelad.core.model.championship.Match;
 import com.perso.footcelad.core.model.enums.DisponibilityType;
 
@@ -10,6 +18,7 @@ import com.perso.footcelad.core.model.enums.DisponibilityType;
  * @author ktf01464
  * 
  */
+@Entity
 public class Disponibility implements Serializable {
 
 	private Long id;
@@ -20,6 +29,8 @@ public class Disponibility implements Serializable {
 	public Disponibility() {
 	}
 
+	@Id
+	@Column(name="DISPONIBILITY_ID")
 	public Long getId() {
 		return id;
 	}
@@ -28,6 +39,7 @@ public class Disponibility implements Serializable {
 		this.id = id;
 	}
 
+	@OneToOne
 	public Match getMatch() {
 		return match;
 	}
@@ -36,6 +48,8 @@ public class Disponibility implements Serializable {
 		this.match = match;
 	}
 
+	@Column(name="DIPONIBILITY_TYPE",nullable=false)
+	@Enumerated(EnumType.STRING)
 	public DisponibilityType getDisponibility() {
 		if(disponibility == null) return DisponibilityType.NONE;
 		return disponibility;
@@ -45,6 +59,7 @@ public class Disponibility implements Serializable {
 		this.disponibility = disponibility;
 	}
 
+	@Column(name="COMMENTAIRE")
 	public String getCommentaire() {
 		return commentaire;
 	}

@@ -7,10 +7,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ManyToAny;
+
 /**
  * @author ktf01464
  * 
  */
+@Entity
 public class Championship implements Serializable {
 
 	private Long id;
@@ -22,6 +31,7 @@ public class Championship implements Serializable {
 	public Championship() {
 	}
 
+	@OneToMany
 	public List<Match> getMatchs() {
 		if (matchs == null) {
 			matchs = new ArrayList<Match>();
@@ -33,6 +43,7 @@ public class Championship implements Serializable {
 		this.matchs = matchs;
 	}
 
+	@OneToMany
 	public List<Team> getTeams() {
 		if (teams == null) {
 			teams = new ArrayList<Team>();
@@ -44,6 +55,7 @@ public class Championship implements Serializable {
 		this.teams = teams;
 	}
 
+	@ManyToMany
 	public List<Stadium> getStadiums() {
 		if (stadiums == null) {
 			stadiums = new ArrayList<Stadium>();
@@ -55,6 +67,7 @@ public class Championship implements Serializable {
 		this.stadiums = stadiums;
 	}
 
+	@Column(name="CHAMPIONSHIP_NAME",nullable=false)
 	public String getChampionshipName() {
 		return championshipName;
 	}
@@ -63,6 +76,8 @@ public class Championship implements Serializable {
 		this.championshipName = championshipName;
 	}
 
+	@Id
+	@Column(name="CHAMPIONSHIP_ID")
 	public Long getId() {
 		return id;
 	}
