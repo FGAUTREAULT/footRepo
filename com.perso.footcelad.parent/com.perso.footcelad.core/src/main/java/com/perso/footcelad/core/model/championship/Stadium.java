@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.groups.Default;
 
@@ -79,6 +81,7 @@ public class Stadium implements Serializable {
 
 	@Id
 	@Column(name = "STADIUM_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}

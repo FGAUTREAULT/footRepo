@@ -57,8 +57,28 @@ public class FootDAOImpl implements IFootDAO {
 		return id;
 	}
 
-	public Object getById(Long id, Class<?> theClass) {
-		return null;
+	@SuppressWarnings("unchecked")
+	public <T> T getById(Long id, Class<T> theClass) {
+		T object;
+		try {
+			// call server
+			serverTransaction = getFootSession().beginTransaction();
+			// create reference and get object
+			object = (T) getFootSession().load(theClass, id);
+			// validate transaction and create object if thread available
+			// different => flush on session, suspend everything to create
+			// object
+			serverTransaction.commit();
+		} catch (HibernateException e) {
+			// Avoid dead lock
+			if (serverTransaction != null)
+				serverTransaction.rollback();
+			throw e;
+		} finally {
+			// Close the server transaction
+			getFootSession().close();
+		}
+		return object;
 	}
 
 	public void update(Object o) {
@@ -86,7 +106,7 @@ public class FootDAOImpl implements IFootDAO {
 	 * @return
 	 */
 	public Session getFootSession() {
-		if (footSession == null) {
+		if (footSession == null || !footSession.isOpen()) {
 			setFootSession(getSessionFactory().openSession());
 		}
 		return footSession;

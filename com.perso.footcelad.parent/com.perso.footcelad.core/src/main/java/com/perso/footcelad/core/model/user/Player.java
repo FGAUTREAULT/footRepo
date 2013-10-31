@@ -33,10 +33,6 @@ import com.perso.footcelad.core.model.enums.PlayerType;
 public class Player extends User {
 
 	/**
-	 * Unique id
-	 */
-	private Long id;
-	/**
 	 * The type of player, either attack, defense, etc. (can be calculated or
 	 * updated by the manager)
 	 */
@@ -83,16 +79,6 @@ public class Player extends User {
 	}
 
 	// *********************************************** Getters and setters
-
-	@Id
-	@Column(name = "PLAYER_ID", nullable = false)
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	@Column(name = "PLAYER_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)

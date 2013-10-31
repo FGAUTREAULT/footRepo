@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -73,6 +75,7 @@ public class User implements Serializable {
 
 	@Id
 	@Column(name = "USER_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -84,7 +87,7 @@ public class User implements Serializable {
 	/**
 	 * Get the complete name, combination of first name and family name
 	 */
-	private String getUserName() {
+	private String buildUserName() {
 		return getUserFirstName() + " " + getUserFamilyName();
 	}
 
@@ -94,7 +97,7 @@ public class User implements Serializable {
 	 * @param firstName
 	 * @param familyName
 	 */
-	public void setUserName(String firstName, String familyName) {
+	public void buidUserName(String firstName, String familyName) {
 		this.userFirstName = firstName;
 		this.userFamilyName = familyName;
 	}
@@ -147,12 +150,12 @@ public class User implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return getUserName().equalsIgnoreCase(((User) obj).getUserName());
+		return buildUserName().equalsIgnoreCase(((User) obj).buildUserName());
 	}
 
 	@Override
 	public int hashCode() {
-		return getUserName().hashCode();
+		return buildUserName().hashCode();
 	}
 
 }

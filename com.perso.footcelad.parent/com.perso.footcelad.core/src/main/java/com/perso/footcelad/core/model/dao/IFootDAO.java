@@ -10,7 +10,7 @@ public interface IFootDAO {
 
 	Long create(Object o);
 
-	Object getById(Long id, Class<?> theClass);
+	<T> T getById(Long id, Class<T> theClass);
 
 	void update(Object o);
 

@@ -2,23 +2,27 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory name="sessionFactory">
-  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.password">admin</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/footCELAD</property>
-  <property name="hibernate.connection.username">root</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory</property>
-  <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.format_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
-  <mapping class="com.perso.footcelad.core.model.championship.Championship"/>
-  <mapping class="com.perso.footcelad.core.model.championship.Match"/>
-  <mapping class="com.perso.footcelad.core.model.championship.Stadium"/>
-  <mapping class="com.perso.footcelad.core.model.championship.Team"/>
-  <mapping class="com.perso.footcelad.core.model.user.Disponibility"/>
-  <mapping class="com.perso.footcelad.core.model.user.User"/>
-  <mapping class="com.perso.footcelad.core.model.user.Player"/>
-  <mapping class="com.perso.footcelad.core.model.user.Manager"/>
- </session-factory>
+	<session-factory name="sessionFactory">
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">admin</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/footCELAD</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.use_sql_comments">true</property>
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		
+		<mapping class="com.perso.footcelad.core.model.championship.Championship" />
+		<mapping class="com.perso.footcelad.core.model.championship.Match" />
+		<mapping class="com.perso.footcelad.core.model.championship.Stadium" />
+		<mapping class="com.perso.footcelad.core.model.championship.Team" />
+		<mapping class="com.perso.footcelad.core.model.user.Disponibility" />
+		<mapping class="com.perso.footcelad.core.model.user.User" />
+		<mapping class="com.perso.footcelad.core.model.user.Player" />
+		<mapping class="com.perso.footcelad.core.model.user.Manager" />
+	</session-factory>
 </hibernate-configuration>

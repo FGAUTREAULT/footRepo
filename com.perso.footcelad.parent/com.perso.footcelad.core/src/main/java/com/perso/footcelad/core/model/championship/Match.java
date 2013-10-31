@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -98,6 +100,7 @@ public class Match implements Serializable {
 
 	@Id
 	@Column(name = "MATCH_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -107,7 +110,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-	@Column(name = "HOME_TEAM", nullable = false)
+//	@Column(name = "HOME_TEAM", nullable = false)
 	public Team getHomeTeam() {
 		return homeTeam;
 	}
@@ -117,7 +120,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-	@Column(name = "GUEST_TEAM", nullable = false)
+//	@Column(name = "GUEST_TEAM", nullable = false)
 	public Team getGuestTeam() {
 		return guestTeam;
 	}
@@ -148,7 +151,7 @@ public class Match implements Serializable {
 		this.matchType = matchType;
 	}
 
-	@OneToOne
+//	@OneToOne
 	public Score getScore() {
 		if (score == null) {
 			score = new Score();
@@ -170,7 +173,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-	@Column(name = "STADIUM", nullable = false)
+//	@Column(name = "STADIUM", nullable = false)
 	public Stadium getStadium() {
 		return stadium;
 	}
@@ -198,7 +201,7 @@ public class Match implements Serializable {
 	 * 
 	 * @return
 	 */
-	private String getMatchName() {
+	private String buildMatchName() {
 		String name;
 		if (MatchType.AMICAL.equals(matchType))
 			name = matchType + ": " + homeTeam.getTeamName() + " VS "
@@ -211,12 +214,12 @@ public class Match implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return getMatchName().equals(((Match) obj).getMatchName());
+		return buildMatchName().equals(((Match) obj).buildMatchName());
 	}
 
 	@Override
 	public int hashCode() {
-		return getMatchName().hashCode();
+		return buildMatchName().hashCode();
 	}
 
 }
