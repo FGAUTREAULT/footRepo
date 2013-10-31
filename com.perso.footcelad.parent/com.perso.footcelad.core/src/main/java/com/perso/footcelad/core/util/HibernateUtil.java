@@ -28,8 +28,9 @@ public class HibernateUtil {
 					.applySettings(
 							config.configure("hibernate.cfg.xml")
 									.getProperties()).buildServiceRegistry();
-			config.buildSessionFactory(serviceRegistry);
+			sessionFactory = config.buildSessionFactory(serviceRegistry);
 		} catch (Exception e) {
+			e.printStackTrace();
 			Logger.getLogger(HibernateUtil.class.getName()).info(
 					"Build session factory failed");
 		}
