@@ -1,9 +1,37 @@
 package com.perso.footcelad.core.model.enums;
 /**
  * 
- * @author ktf01464
+ * @author Fabien Gautreault
  *
  */
 public enum ResultType {
-	VICTORY, DEFEAT, EVEN, WITHDRAY, CANCELED, NONE
+	
+	/**
+	 * The journey have not been played yet
+	 */
+	NONE,
+	/**
+	 * The team won
+	 */
+	VICTORY, 
+	
+	/**
+	 * The team lose
+	 */
+	DEFEAT, 
+	
+	/**
+	 * Both team score even
+	 */
+	EVEN, 
+	
+	/**
+	 * A team withdraw the game
+	 */
+	WITHDRAY, 
+	
+	/**
+	 * The journey have been canceled
+	 */
+	CANCELED
 }

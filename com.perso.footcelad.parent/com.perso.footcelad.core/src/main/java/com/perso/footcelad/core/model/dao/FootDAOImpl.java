@@ -7,6 +7,14 @@ import org.hibernate.Transaction;
 
 import com.perso.footcelad.core.util.HibernateUtil;
 
+/**
+ * 
+ * @author Fabien Gautreault
+ * 
+ *         Gestion of the DAO, factory, session and server transaction to create
+ *         objects
+ * 
+ */
 public class FootDAOImpl implements IFootDAO {
 
 	/**
@@ -34,7 +42,8 @@ public class FootDAOImpl implements IFootDAO {
 			// create reference and get object id
 			id = (Long) getFootSession().save(o);
 			// validate transaction and create object if thread available
-			// different => flush on session, suspend everything to create object
+			// different => flush on session, suspend everything to create
+			// object
 			serverTransaction.commit();
 		} catch (HibernateException e) {
 			// Avoid dead lock
@@ -42,7 +51,7 @@ public class FootDAOImpl implements IFootDAO {
 				serverTransaction.rollback();
 			throw e;
 		} finally {
-			//Close the server transaction
+			// Close the server transaction
 			getFootSession().close();
 		}
 		return id;

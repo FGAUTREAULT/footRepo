@@ -14,20 +14,53 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
- * @author ktf01464
+ * @author Fabien Gautreault
  * 
+ *         The championship is a group of match regarding a list a teams playing
+ *         together We are not in the way to reproduce the complete championship
+ *         FSGT support give all these informations
  */
 @Entity
 public class Championship implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * List of teams in the championship
+	 */
 	private List<Team> teams;
+	/**
+	 * List of match in the championship
+	 */
 	private List<Match> matchs;
+	/**
+	 * List of stadiums availables for this championship
+	 */
 	private List<Stadium> stadiums;
+	/**
+	 * Name of the championship
+	 */
 	private String championshipName;
 
+	/**
+	 * Default constructor
+	 */
 	public Championship() {
 	}
+
+	/**
+	 * Minimum constructor for not nullable arguments
+	 * 
+	 * @param name
+	 *            : name of the chamionship
+	 */
+	public Championship(String name) {
+		setChampionshipName(name);
+	}
+
+	// *********************************************** Getters and setters
 
 	@OneToMany
 	public List<Match> getMatchs() {
@@ -65,7 +98,7 @@ public class Championship implements Serializable {
 		this.stadiums = stadiums;
 	}
 
-	@Column(name="CHAMPIONSHIP_NAME",nullable=false)
+	@Column(name = "CHAMPIONSHIP_NAME", nullable = false)
 	public String getChampionshipName() {
 		return championshipName;
 	}
@@ -75,7 +108,7 @@ public class Championship implements Serializable {
 	}
 
 	@Id
-	@Column(name="CHAMPIONSHIP_ID")
+	@Column(name = "CHAMPIONSHIP_ID")
 	public Long getId() {
 		return id;
 	}
@@ -83,6 +116,8 @@ public class Championship implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	// ****************************************************** Hashcode
 
 	@Override
 	public boolean equals(Object arg0) {

@@ -10,26 +10,75 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.validation.groups.Default;
 
 import com.perso.footcelad.core.model.enums.StadiumType;
 
 /**
- * @author ktf01464
+ * @author Fabien Gautreault
+ * 
+ *         The stadium is the place for people to play
  * 
  */
 @Entity
 public class Stadium implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * Name of the place
+	 */
 	private String stadiumName;
+	/**
+	 * Type of stadium track
+	 */
 	private StadiumType stadiumType;
+	/**
+	 * Address of the stadium
+	 */
 	private String address;
 
+	/**
+	 * Default constructor
+	 */
 	public Stadium() {
 	}
 
+	/**
+	 * Minimum constructor for not nullable arguments Stadium type is enum so
+	 * not null, but don't forget to update it
+	 * 
+	 * @param stadiumName
+	 *            : The name of the stadium
+	 * @param address
+	 *            : The address of the stadium
+	 */
+	public Stadium(String stadiumName, String address) {
+		this(stadiumName, address, StadiumType.UNKNOWN);
+	}
+
+	/**
+	 * Preffered constructor
+	 * 
+	 * @param stadiumName
+	 *            : The name of the stadium
+	 * @param address
+	 *            : The address of the stadium
+	 * @param stadiumType
+	 *            : The type of the stadium track
+	 */
+	public Stadium(String stadiumName, String address, StadiumType stadiumType) {
+		setStadiumName(stadiumName);
+		setaddress(address);
+		setStadiumType(stadiumType);
+	}
+
+	// *********************************************** Getters and setters
+
 	@Id
-	@Column(name="STADIUM_ID")
+	@Column(name = "STADIUM_ID")
 	public Long getId() {
 		return id;
 	}
@@ -38,7 +87,7 @@ public class Stadium implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="STADIUM_NAME", nullable=false)
+	@Column(name = "STADIUM_NAME", nullable = false)
 	public String getStadiumName() {
 		return stadiumName;
 	}
@@ -47,10 +96,11 @@ public class Stadium implements Serializable {
 		this.stadiumName = stadiumName;
 	}
 
-	@Column(name="STADIUM_TYPE",nullable=false)
+	@Column(name = "STADIUM_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public StadiumType getStadiumType() {
-		if(stadiumType == null) return StadiumType.UNKNOWN;
+		if (stadiumType == null)
+			return StadiumType.UNKNOWN;
 		return stadiumType;
 	}
 
@@ -58,7 +108,7 @@ public class Stadium implements Serializable {
 		this.stadiumType = stadiumType;
 	}
 
-	@Column(name="STADIUM_ADDRESS", nullable=false)
+	@Column(name = "STADIUM_ADDRESS", nullable = false)
 	public String getaddress() {
 		return address;
 	}
@@ -66,6 +116,8 @@ public class Stadium implements Serializable {
 	public void setaddress(String address) {
 		this.address = address;
 	}
+
+	// *********************************************** Hash code
 
 	@Override
 	public boolean equals(Object obj) {

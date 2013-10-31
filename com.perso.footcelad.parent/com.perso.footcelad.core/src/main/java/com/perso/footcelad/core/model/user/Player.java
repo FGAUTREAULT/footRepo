@@ -16,30 +16,76 @@ import javax.persistence.OneToMany;
 
 import com.perso.footcelad.core.model.enums.PlayerType;
 
-
 /**
- * @author ktf01464
+ * @author Fabien Gautreault
+ * 
+ *         A player is a user with following privileges:
+ * 
+ *         - Access to his profile,
+ * 
+ *         - Write disponibility,
+ * 
+ *         - No access to manager part.
  * 
  */
 @Entity
 @DiscriminatorValue("Player")
 public class Player extends User {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * The type of player, either attack, defense, etc. (can be calculated or
+	 * updated by the manager)
+	 */
 	private PlayerType playerType;
+	/**
+	 * Number of goal during championship, updated by manager
+	 */
 	private int nbGoal;
+	/**
+	 * Number of pass during championship, updated by manager
+	 */
 	private int nbPass;
+	/**
+	 * Licence number, updated by manager
+	 */
 	private int licenceNumber;
+	/**
+	 * Number of wash during championship, updated by manager
+	 */
 	private int nbWash;
+
+	// ******* Profile part
+	/**
+	 * Disponibilities for the games
+	 */
 	private List<Disponibility> disponibilities;
+	/**
+	 * The type of player the participant want to be
+	 */
 	private PlayerType preferredPositionA;
+	/**
+	 * The type of player the participant want to be
+	 */
 	private PlayerType preferredPositionB;
 
+	/**
+	 * Default constructor
+	 * 
+	 * All parameter can be null, easier to manage the begining of the
+	 * championship Part of the information are profile one, or will be updated
+	 * by the manager after each game
+	 */
 	public Player() {
 	}
 
+	// *********************************************** Getters and setters
+
 	@Id
-	@Column(name="PLAYER_ID", nullable=false)
+	@Column(name = "PLAYER_ID", nullable = false)
 	public Long getId() {
 		return id;
 	}
@@ -48,7 +94,7 @@ public class Player extends User {
 		this.id = id;
 	}
 
-	@Column(name="PLAYER_TYPE", nullable=false)
+	@Column(name = "PLAYER_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public PlayerType getPlayerType() {
 		return playerType;
@@ -58,7 +104,7 @@ public class Player extends User {
 		this.playerType = playerType;
 	}
 
-	@Column(name="NB_GOAL")
+	@Column(name = "NB_GOAL")
 	public int getNbGoal() {
 		return nbGoal;
 	}
@@ -67,7 +113,7 @@ public class Player extends User {
 		this.nbGoal = nbGoal;
 	}
 
-	@Column(name="NB_PASS")
+	@Column(name = "NB_PASS")
 	public int getNbPass() {
 		return nbPass;
 	}
@@ -76,7 +122,7 @@ public class Player extends User {
 		this.nbPass = nbPass;
 	}
 
-	@Column(name="LICENCE_NUMBER")
+	@Column(name = "LICENCE_NUMBER")
 	public int getLicenceNumber() {
 		return licenceNumber;
 	}
@@ -85,7 +131,7 @@ public class Player extends User {
 		this.licenceNumber = licenceNumber;
 	}
 
-	@Column(name="NB_WASH")
+	@Column(name = "NB_WASH")
 	public int getNbWash() {
 		return nbWash;
 	}
@@ -106,7 +152,7 @@ public class Player extends User {
 		this.disponibilities = disponibilities;
 	}
 
-	@Column(name="PREFERED_POS_A",nullable=false)
+	@Column(name = "PREFERED_POS_A", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public PlayerType getPreferredPositionA() {
 		if (preferredPositionA == null) {
@@ -119,7 +165,7 @@ public class Player extends User {
 		this.preferredPositionA = preferredPositionA;
 	}
 
-	@Column(name="PREFERED_POS_B",nullable=false)
+	@Column(name = "PREFERED_POS_B", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public PlayerType getPreferredPositionB() {
 		if (preferredPositionB == null) {

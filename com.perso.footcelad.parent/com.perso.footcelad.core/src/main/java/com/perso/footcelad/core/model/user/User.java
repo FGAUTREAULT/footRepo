@@ -11,9 +11,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.swing.ImageIcon;
 
+import org.springframework.beans.factory.config.SetFactoryBean;
+
 /**
  * 
- * @author ktf01464
+ * @author Fabien Gautreault
+ * 
+ *         The main character, contains profile information
  * 
  */
 @Entity
@@ -21,15 +25,51 @@ import javax.swing.ImageIcon;
 @DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
 public class User implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * The family name of the user
+	 */
 	private String userFamilyName;
+	/**
+	 * The first name of the user
+	 */
 	private String userFirstName;
+	/**
+	 * The avatar of the player
+	 */
 	private ImageIcon avatar;
+	/**
+	 * The telephone of the player
+	 */
 	private String tel;
+	/**
+	 * The mail of the player, useful to contact or at least to send
+	 * convocations
+	 */
 	private String mail;
 
+	/**
+	 * Default constructor
+	 */
 	public User() {
 	}
+
+	/**
+	 * Minimum constructor for not nullable arguments
+	 * @param familyName 	: the family name of the user
+	 * @param firstName		: the first name of the user
+	 * @param mail			: the mail of the user
+	 */
+	public User(String familyName, String firstName, String mail) {
+		setUserFamilyName(familyName);
+		setUserFirstName(firstName);
+		setMail(mail);
+	}
+
+	// *********************************************** Getters and setters
 
 	@Id
 	@Column(name = "USER_ID")
@@ -102,6 +142,8 @@ public class User implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	// *********************************************** Hash code
 
 	@Override
 	public boolean equals(Object obj) {

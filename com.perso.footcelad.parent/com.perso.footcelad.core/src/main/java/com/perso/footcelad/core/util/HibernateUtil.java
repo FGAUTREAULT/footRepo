@@ -8,7 +8,9 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  * 
- * @author ktf01464
+ * @author Fabien Gautreault
+ * 
+ *         First bean to get session and contact server
  * 
  */
 public class HibernateUtil {

@@ -9,9 +9,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.perso.footcelad.core.model.championship.Championship;
 import com.perso.footcelad.core.model.dao.IFootDAO;
 
+/**
+ * 
+ * @author Fabien Gautreault
+ *
+ */
 public class FootDAOTest extends TestCase{
 	
-	IFootDAO dao;
+	/**
+	 * Database
+	 */
+	private IFootDAO dao;
 
 	@Before
 	public void setUp() throws Exception {
@@ -19,6 +27,9 @@ public class FootDAOTest extends TestCase{
 		dao = (IFootDAO) context.getBean("footDAO");
 	}
 
+	/**
+	 * Test create object
+	 */
 	@Test
 	public void testCreate() {
 		assertNotNull(dao);

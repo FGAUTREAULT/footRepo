@@ -4,21 +4,41 @@ import java.io.Serializable;
 
 import com.perso.footcelad.core.model.enums.ResultType;
 
-
 /**
  * 
- * @author ktf01464
- *
+ * @author Fabien Gautreault
+ * 
+ *         The score give the amount of goal for each team and the type of
+ *         result for the home team
+ * 
+ *         TODO mapping
  */
 public class Score implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * Type of result for the home team
+	 */
 	private ResultType result;
-	private int scoreTeamA;
-	private int scoreTeamB;
-	
+	/**
+	 * Number of goals of home team
+	 */
+	private int scoreHomeTeam;
+	/**
+	 * Number of goals of guest team
+	 */
+	private int scoreGuestTeam;
+
+	/**
+	 * Default constructor
+	 */
 	public Score() {
 	}
+
+	// *********************************************** Getters and setters
 
 	public Long getId() {
 		return id;
@@ -39,24 +59,24 @@ public class Score implements Serializable {
 		this.result = result;
 	}
 
-	public int getScoreTeamA() {
-		return scoreTeamA;
+	public int getScoreHomeTeam() {
+		return scoreHomeTeam;
 	}
 
-	public void setScoreTeamA(int scoreTeamA) {
-		this.scoreTeamA = scoreTeamA;
+	public void setScoreHomeTeam(int scoreHomeTeam) {
+		this.scoreHomeTeam = scoreHomeTeam;
 	}
 
-	public int getScoreTeamB() {
-		return scoreTeamB;
+	public int getScoreGuestTeam() {
+		return scoreGuestTeam;
 	}
 
-	public void setScoreTeamB(int scoreTeamB) {
-		this.scoreTeamB = scoreTeamB;
+	public void setScoreGuestTeam(int scoreGuestTeam) {
+		this.scoreGuestTeam = scoreGuestTeam;
 	}
-	
+
 	public String getScoreText() {
-		return scoreTeamA + " - " + scoreTeamB;
+		return scoreHomeTeam + " - " + scoreGuestTeam;
 	}
-	
+
 }

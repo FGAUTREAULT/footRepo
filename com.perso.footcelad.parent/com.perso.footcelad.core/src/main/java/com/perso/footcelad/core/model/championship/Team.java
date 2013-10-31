@@ -17,22 +17,57 @@ import com.perso.footcelad.core.model.user.Manager;
 import com.perso.footcelad.core.model.user.Player;
 
 /**
- * @author ktf01464
+ * @author Fabien Gautreault
+ * 
+ *         A team is a group of players plus a manager
  * 
  */
 @Entity
 public class Team implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * The name of the team
+	 */
 	private String teamName;
+	/**
+	 * List of all players in the team
+	 */
 	private List<Player> players;
+	/**
+	 * The manager of the team
+	 */
 	private Manager manager;
 
+	/**
+	 * Default constructor
+	 */
 	public Team() {
 	}
 
+	/**
+	 * Minimum constructor for not nullable arguments The name of the team is
+	 * the only required parameter, we are not in the way to keep recorded all
+	 * players and manager name for all team, FSGT support give all these
+	 * information and keep it updated
+	 * 
+	 * CELAD team will need all the information, best practice would be to keep
+	 * updated at least the manager of each team, to send FDM, contact for
+	 * anything
+	 * 
+	 * @param name : the name of the team
+	 */
+	public Team(String name) {
+		setTeamName(name);
+	}
+
+	// *********************************************** Getters and setters
+
 	@Id
-	@Column(name="TEAM_ID")
+	@Column(name = "TEAM_ID")
 	public Long getId() {
 		return id;
 	}
@@ -41,7 +76,7 @@ public class Team implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="TEAM_NAME", nullable=false)
+	@Column(name = "TEAM_NAME", nullable = false)
 	public String getTeamName() {
 		return teamName;
 	}
@@ -70,6 +105,8 @@ public class Team implements Serializable {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
+
+	// *********************************************** Hash code
 
 	@Override
 	public boolean equals(Object obj) {

@@ -1,9 +1,18 @@
 package com.perso.footcelad.core.model.enums;
 /**
  * 
- * @author ktf01464
+ * @author Fabien Gautreault
  *
  */
 public enum MatchType {
-	AMICAL, JOURNEY
+	
+	/**
+	 * Amical game won't change the chamionship results
+	 */
+	AMICAL, 
+	
+	/**
+	 * A journey is part of the championship
+	 */
+	JOURNEY
 }

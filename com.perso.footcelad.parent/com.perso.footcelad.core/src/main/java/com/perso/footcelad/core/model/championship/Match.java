@@ -21,29 +21,83 @@ import javax.persistence.TemporalType;
 import com.perso.footcelad.core.model.enums.MatchType;
 import com.perso.footcelad.core.model.user.Player;
 
-
 /**
- * @author ktf01464
+ * @author Fabien Gautreault
  * 
+ *         A match is a meeting between two teams at a date and place
  */
 @Entity
 public class Match implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
-	private Team teamA;
-	private Team teamB;
+	/**
+	 * Home team
+	 */
+	private Team homeTeam;
+	/**
+	 * Guest team
+	 */
+	private Team guestTeam;
+	/**
+	 * Day and hour of the match
+	 */
 	private Date date;
+	/**
+	 * Type of the match
+	 */
 	private MatchType matchType;
+	/**
+	 * Give the result score for each team, and the type of result for the home
+	 * team
+	 */
 	private Score score;
+	/**
+	 * Number of the journey, not relevant for amical match
+	 */
 	private int journeyNumber;
+	/**
+	 * The place to play
+	 */
 	private Stadium stadium;
+	/**
+	 * The list of players participating As this implementation is done
+	 * regarding CELAD team, this list represent the players of CELAD called in
+	 * to play this game
+	 */
 	private List<Player> players;
 
+	/**
+	 * Default constructor
+	 */
 	public Match() {
 	}
 
+	/**
+	 * Minimum constructor for not nullable arguments
+	 * 
+	 * @param homeTeam
+	 *            : the team receiving
+	 * @param guestTeam
+	 *            : the guest team
+	 * @param matchDate
+	 *            : the day and hour of the game
+	 * @param stadium
+	 *            : the place to play
+	 */
+	public Match(Team homeTeam, Team guestTeam, Date matchDate, Stadium stadium) {
+		setHomeTeam(homeTeam);
+		setGuestTeam(guestTeam);
+		setDate(matchDate);
+		setStadium(stadium);
+	}
+
+	// *********************************************** Getters and setters
+
 	@Id
-	@Column(name="MATCH_ID")
+	@Column(name = "MATCH_ID")
 	public Long getId() {
 		return id;
 	}
@@ -53,27 +107,27 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-	@Column(name="TEAM_A",nullable=false)
-	public Team getTeamA() {
-		return teamA;
+	@Column(name = "HOME_TEAM", nullable = false)
+	public Team getHomeTeam() {
+		return homeTeam;
 	}
 
-	public void setTeamA(Team teamA) {
-		this.teamA = teamA;
+	public void setHomeTeam(Team homeTeam) {
+		this.homeTeam = homeTeam;
 	}
 
 	@OneToOne
-	@Column(name="TEAM_B",nullable=false)
-	public Team getTeamB() {
-		return teamB;
+	@Column(name = "GUEST_TEAM", nullable = false)
+	public Team getGuestTeam() {
+		return guestTeam;
 	}
 
-	public void setTeamB(Team teamB) {
-		this.teamB = teamB;
+	public void setGuestTeam(Team guestTeam) {
+		this.guestTeam = guestTeam;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="MATCH_DATE",nullable=false)
+	@Column(name = "MATCH_DATE", nullable = false)
 	public Date getDate() {
 		return date;
 	}
@@ -82,7 +136,7 @@ public class Match implements Serializable {
 		this.date = date;
 	}
 
-	@Column(name="MATCH_TYPE")
+	@Column(name = "MATCH_TYPE")
 	@Enumerated(EnumType.STRING)
 	public MatchType getMatchType() {
 		if (matchType == null)
@@ -106,7 +160,7 @@ public class Match implements Serializable {
 		this.score = score;
 	}
 
-	@Column(name="JOURNEY_NB", nullable=false,unique=true)
+	@Column(name = "JOURNEY_NB", unique = true)
 	public int getJourneyNumber() {
 		return journeyNumber;
 	}
@@ -116,7 +170,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-	@Column(name="STADIUM",nullable=false)
+	@Column(name = "STADIUM", nullable = false)
 	public Stadium getStadium() {
 		return stadium;
 	}
@@ -137,6 +191,8 @@ public class Match implements Serializable {
 		this.players = players;
 	}
 
+	// *********************************************** Hashcode
+
 	/**
 	 * Get the combination of journey, match type and team names
 	 * 
@@ -145,11 +201,11 @@ public class Match implements Serializable {
 	private String getMatchName() {
 		String name;
 		if (MatchType.AMICAL.equals(matchType))
-			name = matchType + ": " + teamA.getTeamName() + " VS "
-					+ teamB.getTeamName();
+			name = matchType + ": " + homeTeam.getTeamName() + " VS "
+					+ guestTeam.getTeamName();
 		else
-			name = matchType + " n°" + journeyNumber +": " + teamA.getTeamName() + " VS "
-					+ teamB.getTeamName();
+			name = matchType + " n°" + journeyNumber + ": "
+					+ homeTeam.getTeamName() + " VS " + guestTeam.getTeamName();
 		return name;
 	}
 

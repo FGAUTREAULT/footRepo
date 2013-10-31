@@ -14,22 +14,42 @@ import com.perso.footcelad.core.model.enums.DisponibilityType;
 
 /**
  * 
- * @author ktf01464
+ * @author Fabien Gautreault
+ * 
+ *         Disponibility have to be set by a player for each game for the
+ *         manager to be able to build a team
  * 
  */
 @Entity
 public class Disponibility implements Serializable {
 
+	/**
+	 * Unique id
+	 */
 	private Long id;
+	/**
+	 * The game, date and place to play
+	 */
 	private Match match;
+	/**
+	 * If the player can make it or not
+	 */
 	private DisponibilityType disponibility;
+	/**
+	 * To precise player decision
+	 */
 	private String commentaire;
 
+	/**
+	 * Default constructor
+	 */
 	public Disponibility() {
 	}
-
+	
+	// *********************************************** Getters and setters
+	
 	@Id
-	@Column(name="DISPONIBILITY_ID")
+	@Column(name = "DISPONIBILITY_ID")
 	public Long getId() {
 		return id;
 	}
@@ -47,10 +67,11 @@ public class Disponibility implements Serializable {
 		this.match = match;
 	}
 
-	@Column(name="DIPONIBILITY_TYPE",nullable=false)
+	@Column(name = "DIPONIBILITY_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public DisponibilityType getDisponibility() {
-		if(disponibility == null) return DisponibilityType.NONE;
+		if (disponibility == null)
+			return DisponibilityType.NONE;
 		return disponibility;
 	}
 
@@ -58,7 +79,7 @@ public class Disponibility implements Serializable {
 		this.disponibility = disponibility;
 	}
 
-	@Column(name="COMMENTAIRE")
+	@Column(name = "COMMENTAIRE")
 	public String getCommentaire() {
 		return commentaire;
 	}
@@ -66,6 +87,8 @@ public class Disponibility implements Serializable {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
+	
+	// *********************************************** Hash code
 
 	@Override
 	public boolean equals(Object obj) {
