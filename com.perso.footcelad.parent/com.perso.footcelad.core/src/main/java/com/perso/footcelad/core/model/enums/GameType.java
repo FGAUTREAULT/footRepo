@@ -4,7 +4,7 @@ package com.perso.footcelad.core.model.enums;
  * @author Fabien Gautreault
  *
  */
-public enum MatchType {
+public enum GameType {
 	
 	/**
 	 * Amical game won't change the chamionship results

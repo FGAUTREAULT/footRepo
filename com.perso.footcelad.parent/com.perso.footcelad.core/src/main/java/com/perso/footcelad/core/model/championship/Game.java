@@ -12,24 +12,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.perso.footcelad.core.model.enums.MatchType;
+import com.perso.footcelad.core.model.enums.GameType;
 import com.perso.footcelad.core.model.user.Player;
 
 /**
  * @author Fabien Gautreault
  * 
- *         A match is a meeting between two teams at a date and place
+ *         A game is a meeting between two teams at a date and place
  */
 @Entity
-public class Match implements Serializable {
+public class Game implements Serializable {
 
 	/**
 	 * Unique id
@@ -44,20 +47,20 @@ public class Match implements Serializable {
 	 */
 	private Team guestTeam;
 	/**
-	 * Day and hour of the match
+	 * Day and hour of the game
 	 */
 	private Date date;
 	/**
-	 * Type of the match
+	 * Type of the game
 	 */
-	private MatchType matchType;
+	private GameType gameType;
 	/**
 	 * Give the result score for each team, and the type of result for the home
 	 * team
 	 */
 	private Score score;
 	/**
-	 * Number of the journey, not relevant for amical match
+	 * Number of the journey, not relevant for amical game
 	 */
 	private int journeyNumber;
 	/**
@@ -74,7 +77,7 @@ public class Match implements Serializable {
 	/**
 	 * Default constructor
 	 */
-	public Match() {
+	public Game() {
 	}
 
 	/**
@@ -84,22 +87,22 @@ public class Match implements Serializable {
 	 *            : the team receiving
 	 * @param guestTeam
 	 *            : the guest team
-	 * @param matchDate
+	 * @param gameDate
 	 *            : the day and hour of the game
 	 * @param stadium
 	 *            : the place to play
 	 */
-	public Match(Team homeTeam, Team guestTeam, Date matchDate, Stadium stadium) {
+	public Game(Team homeTeam, Team guestTeam, Date gameDate, Stadium stadium) {
 		setHomeTeam(homeTeam);
 		setGuestTeam(guestTeam);
-		setDate(matchDate);
+		setDate(gameDate);
 		setStadium(stadium);
 	}
 
 	// *********************************************** Getters and setters
 
 	@Id
-	@Column(name = "MATCH_ID")
+	@Column(name = "GAME_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;
@@ -110,7 +113,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-//	@Column(name = "HOME_TEAM", nullable = false)
+	@JoinColumn(name = "HOME_TEAM", nullable = false, referencedColumnName="TEAM_ID")
 	public Team getHomeTeam() {
 		return homeTeam;
 	}
@@ -120,7 +123,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-//	@Column(name = "GUEST_TEAM", nullable = false)
+	@JoinColumn(name = "GUEST_TEAM", nullable = false, referencedColumnName="TEAM_ID")
 	public Team getGuestTeam() {
 		return guestTeam;
 	}
@@ -130,7 +133,7 @@ public class Match implements Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "MATCH_DATE", nullable = false)
+	@Column(name = "GAME_DATE", nullable = false)
 	public Date getDate() {
 		return date;
 	}
@@ -139,16 +142,16 @@ public class Match implements Serializable {
 		this.date = date;
 	}
 
-	@Column(name = "MATCH_TYPE")
+	@Column(name = "GAME_TYPE")
 	@Enumerated(EnumType.STRING)
-	public MatchType getMatchType() {
-		if (matchType == null)
-			return MatchType.JOURNEY;
-		return matchType;
+	public GameType getGameType() {
+		if (gameType == null)
+			return GameType.JOURNEY;
+		return gameType;
 	}
 
-	public void setMatchType(MatchType matchType) {
-		this.matchType = matchType;
+	public void setGameType(GameType gameType) {
+		this.gameType = gameType;
 	}
 
 //	@OneToOne
@@ -173,7 +176,7 @@ public class Match implements Serializable {
 	}
 
 	@OneToOne
-//	@Column(name = "STADIUM", nullable = false)
+	@JoinColumn(name = "STADIUM", nullable = false, referencedColumnName="STADIUM_ID")
 	public Stadium getStadium() {
 		return stadium;
 	}
@@ -182,7 +185,8 @@ public class Match implements Serializable {
 		this.stadium = stadium;
 	}
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "game_player", joinColumns = @JoinColumn(name = "GAME_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	public List<Player> getPlayers() {
 		if (players == null) {
 			players = new ArrayList<Player>();
@@ -197,29 +201,28 @@ public class Match implements Serializable {
 	// *********************************************** Hashcode
 
 	/**
-	 * Get the combination of journey, match type and team names
+	 * Get the combination of journey, game type and team names
 	 * 
 	 * @return
 	 */
-	private String buildMatchName() {
+	private String buildGameName() {
 		String name;
-		if (MatchType.AMICAL.equals(matchType))
-			name = matchType + ": " + homeTeam.getTeamName() + " VS "
+		if (GameType.AMICAL.equals(gameType))
+			name = gameType + ": " + homeTeam.getTeamName() + " VS "
 					+ guestTeam.getTeamName();
 		else
-			name = matchType + " n°" + journeyNumber + ": "
+			name = gameType + " n°" + journeyNumber + ": "
 					+ homeTeam.getTeamName() + " VS " + guestTeam.getTeamName();
 		return name;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return buildMatchName().equals(((Match) obj).buildMatchName());
+		return buildGameName().equals(((Game) obj).buildGameName());
 	}
 
 	@Override
 	public int hashCode() {
-		return buildMatchName().hashCode();
+		return buildGameName().hashCode();
 	}
-
 }

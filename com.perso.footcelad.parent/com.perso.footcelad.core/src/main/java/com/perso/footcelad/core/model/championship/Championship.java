@@ -4,9 +4,7 @@
 package com.perso.footcelad.core.model.championship;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -23,7 +21,7 @@ import javax.persistence.OneToMany;
 /**
  * @author Fabien Gautreault
  * 
- *         The championship is a group of match regarding a list a teams playing
+ *         The championship is a group of games regarding a list a teams playing
  *         together We are not in the way to reproduce the complete championship
  *         FSGT support give all these informations
  */
@@ -44,13 +42,13 @@ public class Championship implements Serializable {
 	 */
 	private Set<Team> teams;
 	/**
-	 * List of match in the championship
+	 * List of games in the championship
 	 */
-	private List<Match> matchs;
+	private Set<Game> games;
 	/**
 	 * List of stadiums availables for this championship
 	 */
-	private List<Stadium> stadiums;
+	private Set<Stadium> stadiums;
 	/**
 	 * Name of the championship
 	 */
@@ -74,16 +72,17 @@ public class Championship implements Serializable {
 
 	// *********************************************** Getters and setters
 
-	@OneToMany()
-	public List<Match> getMatchs() {
-		if (matchs == null) {
-			matchs = new ArrayList<Match>();
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "championship_game", joinColumns = @JoinColumn(name = "CHAMPIONSHIP_ID"), inverseJoinColumns = @JoinColumn(name = "GAME_ID"))
+	public Set<Game> getGames() {
+		if (games == null) {
+			games = new HashSet<Game>();
 		}
-		return matchs;
+		return games;
 	}
 
-	public void setMatchs(List<Match> matchs) {
-		this.matchs = matchs;
+	public void setGames(Set<Game> games) {
+		this.games = games;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY)
@@ -99,15 +98,16 @@ public class Championship implements Serializable {
 		this.teams = teams;
 	}
 
-	@ManyToMany
-	public List<Stadium> getStadiums() {
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "championship_stadium", joinColumns = @JoinColumn(name = "CHAMPIONSHIP_ID"), inverseJoinColumns = @JoinColumn(name = "STADIUM_ID"))
+	public Set<Stadium> getStadiums() {
 		if (stadiums == null) {
-			stadiums = new ArrayList<Stadium>();
+			stadiums = new HashSet<Stadium>();
 		}
 		return stadiums;
 	}
 
-	public void setStadiums(List<Stadium> stadiums) {
+	public void setStadiums(Set<Stadium> stadiums) {
 		this.stadiums = stadiums;
 	}
 

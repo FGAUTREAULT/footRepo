@@ -62,7 +62,7 @@ public class Stadium implements Serializable {
 	}
 
 	/**
-	 * Preffered constructor
+	 * Preferred constructor
 	 * 
 	 * @param stadiumName
 	 *            : The name of the stadium

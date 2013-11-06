@@ -17,7 +17,7 @@
 		<property name="hibernate.c3p0.max_size">20</property>
 		
 		<mapping class="com.perso.footcelad.core.model.championship.Championship" />
-		<mapping class="com.perso.footcelad.core.model.championship.Match" />
+		<mapping class="com.perso.footcelad.core.model.championship.Game" />
 		<mapping class="com.perso.footcelad.core.model.championship.Stadium" />
 		<mapping class="com.perso.footcelad.core.model.championship.Team" />
 		<mapping class="com.perso.footcelad.core.model.user.Disponibility" />

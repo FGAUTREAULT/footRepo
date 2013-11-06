@@ -13,8 +13,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.swing.ImageIcon;
 
-import org.springframework.beans.factory.config.SetFactoryBean;
-
 /**
  * 
  * @author Fabien Gautreault
@@ -74,7 +72,7 @@ public class User implements Serializable {
 	// *********************************************** Getters and setters
 
 	@Id
-	@Column(name = "USER_ID")
+	@Column(name = "USER_ID", unique = true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
 		return id;

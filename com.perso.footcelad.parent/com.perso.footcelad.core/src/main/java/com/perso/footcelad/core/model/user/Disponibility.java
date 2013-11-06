@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.perso.footcelad.core.model.championship.Match;
+import com.perso.footcelad.core.model.championship.Game;
 import com.perso.footcelad.core.model.enums.DisponibilityType;
 
 /**
@@ -32,7 +32,7 @@ public class Disponibility implements Serializable {
 	/**
 	 * The game, date and place to play
 	 */
-	private Match match;
+	private Game game;
 	/**
 	 * If the player can make it or not
 	 */
@@ -62,12 +62,12 @@ public class Disponibility implements Serializable {
 	}
 
 	@OneToOne
-	public Match getMatch() {
-		return match;
+	public Game getGame() {
+		return game;
 	}
 
-	public void setMatch(Match match) {
-		this.match = match;
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 	@Column(name = "DIPONIBILITY_TYPE", nullable = false)

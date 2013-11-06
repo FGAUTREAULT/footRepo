@@ -64,7 +64,7 @@ public class FootDAOImpl implements IFootDAO {
 			// call server
 			serverTransaction = getFootSession().beginTransaction();
 			// create reference and get object
-			object = (T) getFootSession().load(theClass, id);
+			object = (T) getFootSession().get(theClass, id);
 			// validate transaction and create object if thread available
 			// different => flush on session, suspend everything to create
 			// object
@@ -78,6 +78,7 @@ public class FootDAOImpl implements IFootDAO {
 			// Close the server transaction
 			getFootSession().close();
 		}
+		
 		return object;
 	}
 
