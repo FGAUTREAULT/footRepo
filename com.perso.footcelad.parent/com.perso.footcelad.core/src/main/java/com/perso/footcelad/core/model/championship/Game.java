@@ -4,9 +4,9 @@
 package com.perso.footcelad.core.model.championship;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,7 +72,7 @@ public class Game implements Serializable {
 	 * regarding CELAD team, this list represent the players of CELAD called in
 	 * to play this game
 	 */
-	private List<Player> players;
+	private Set<Player> players;
 
 	/**
 	 * Default constructor
@@ -187,14 +187,14 @@ public class Game implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "game_player", joinColumns = @JoinColumn(name = "GAME_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
-	public List<Player> getPlayers() {
+	public Set<Player> getPlayers() {
 		if (players == null) {
-			players = new ArrayList<Player>();
+			players = new HashSet<Player>();
 		}
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(Set<Player> players) {
 		this.players = players;
 	}
 

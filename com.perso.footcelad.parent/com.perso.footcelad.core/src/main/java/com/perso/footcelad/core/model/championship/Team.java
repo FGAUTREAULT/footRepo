@@ -4,14 +4,18 @@
 package com.perso.footcelad.core.model.championship;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -42,7 +46,7 @@ public class Team implements Serializable {
 	/**
 	 * List of all players in the team
 	 */
-	private List<Player> players;
+	private Set<Player> players;
 	/**
 	 * The manager of the team
 	 */
@@ -92,15 +96,16 @@ public class Team implements Serializable {
 		this.teamName = teamName;
 	}
 
-	@OneToMany
-	public List<Player> getPlayers() {
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "team_players", joinColumns = @JoinColumn(name = "TEAM_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
+	public Set<Player> getPlayers() {
 		if (players == null) {
-			players = new ArrayList<Player>();
+			players = new HashSet<Player>();
 		}
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(Set<Player> players) {
 		this.players = players;
 	}
 

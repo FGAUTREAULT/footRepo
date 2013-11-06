@@ -3,15 +3,14 @@
  */
 package com.perso.footcelad.core.model.user;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.perso.footcelad.core.model.enums.PlayerType;
@@ -58,7 +57,7 @@ public class Player extends User {
 	/**
 	 * Disponibilities for the games
 	 */
-	private List<Disponibility> disponibilities;
+	private Set<Disponibility> disponibilities;
 	/**
 	 * The type of player the participant want to be
 	 */
@@ -77,12 +76,27 @@ public class Player extends User {
 	 */
 	public Player() {
 	}
+	
+	/**
+	 * Minimum constructor for not nullable arguments
+	 * @param familyName 	: the family name of the user
+	 * @param firstName		: the first name of the user
+	 * @param mail			: the mail of the user
+	 */
+	public Player(String familyName, String firstName, String mail) {
+		setUserFamilyName(familyName);
+		setUserFirstName(firstName);
+		setMail(mail);
+	}
 
 	// *********************************************** Getters and setters
 
 	@Column(name = "PLAYER_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public PlayerType getPlayerType() {
+		if(playerType == null) {
+			playerType = PlayerType.NONE; 
+		}
 		return playerType;
 	}
 
@@ -127,14 +141,14 @@ public class Player extends User {
 	}
 
 	@OneToMany
-	public List<Disponibility> getDisponibilities() {
+	public Set<Disponibility> getDisponibilities() {
 		if (disponibilities == null) {
-			disponibilities = new ArrayList<Disponibility>();
+			disponibilities = new HashSet<Disponibility>();
 		}
 		return disponibilities;
 	}
 
-	public void setDisponibilities(List<Disponibility> disponibilities) {
+	public void setDisponibilities(Set<Disponibility> disponibilities) {
 		this.disponibilities = disponibilities;
 	}
 
