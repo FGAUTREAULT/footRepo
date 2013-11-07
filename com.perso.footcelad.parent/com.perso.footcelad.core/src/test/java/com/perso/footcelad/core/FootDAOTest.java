@@ -23,7 +23,7 @@ import com.perso.footcelad.core.model.user.Player;
  * @author Fabien Gautreault
  * 
  */
-public class FootDAOTest extends TestCase {
+public class FootDAOTest{
 
 	/**
 	 * Database
@@ -36,33 +36,33 @@ public class FootDAOTest extends TestCase {
 				"context.xml");
 		dao = (IFootDAO) context.getBean("footDAO");
 	}
-
+	
 	/**
 	 * Test create object
 	 */
 	@Test
 	public void testCreate() {
-		assertNotNull(dao);
+		TestCase.assertNotNull(dao);
 
 		//Creation d'une équipe
 		Team homeTeam = new Team("FC BARCA");
 		Long id = dao.create(homeTeam);
-		assertNotNull(id);
+		TestCase.assertNotNull(id);
 		
 		//Création de 2 joueurs
 		Player fabTrue = new Player("Inho", "Fab", "fab.inho@gmail.com");
 		Long idPlayer1 = dao.create(fabTrue);
-		assertNotNull(idPlayer1);
+		TestCase.assertNotNull(idPlayer1);
 		
 		Player fabFalse = new Player("Peggy", "Fab", "fab.peggy@gmail.com");
 		Long idPlayer2 = dao.create(fabFalse);
-		assertNotNull(idPlayer2);
+		TestCase.assertNotNull(idPlayer2);
 		
 		//Récupération des joueurs
 		Player fab1 = (Player) dao.getById(idPlayer1, Player.class);
-		assertNotNull(fab1.getId());
+		TestCase.assertNotNull(fab1.getId());
 		Player fab2 = (Player) dao.getById(idPlayer2, Player.class);
-		assertNotNull(fab2.getId());
+		TestCase.assertNotNull(fab2.getId());
 
 		//Création de l'autre équipe
 		Team guestTeam = new Team("CE CELAD");
@@ -71,25 +71,25 @@ public class FootDAOTest extends TestCase {
 		players.add(fab2);
 		guestTeam.setPlayers(players);
 		Long idGuest = dao.create(guestTeam);
-		assertNotNull(idGuest);
+		TestCase.assertNotNull(idGuest);
 		
 		//Creation d'un Stade
 		Stadium stadium = new Stadium("Camp nou", "Carrer d'Aristides Maillol, 12, Barcelona", StadiumType.GRASS);
 		Long idStadium = dao.create(stadium);
-		assertNotNull(idStadium);
+		TestCase.assertNotNull(idStadium);
 		
 		//Récupération des équipes et stade
 		Team teamHome = (Team) dao.getById(id, Team.class);
-		assertNotNull(teamHome.getId());
+		TestCase.assertNotNull(teamHome.getId());
 		Team teamGuest = (Team) dao.getById(idGuest, Team.class);
-		assertNotNull(teamGuest.getId());
+		TestCase.assertNotNull(teamGuest.getId());
 		Stadium macthStadium = (Stadium) dao.getById(idStadium, Stadium.class);
-		assertNotNull(macthStadium.getId());
+		TestCase.assertNotNull(macthStadium.getId());
 		
 		//Création du game
 		Game game = new Game(teamHome, teamGuest, new Date(), macthStadium);
 		Long idgame = dao.create(game);
-		assertNotNull(idgame);
+		TestCase.assertNotNull(idgame);
 		
 		//Récupération du game
 		Game gameEx = (Game) dao.getById(idgame, Game.class);
@@ -97,7 +97,7 @@ public class FootDAOTest extends TestCase {
 		selectedPlayers.add(fab1);
 		selectedPlayers.add(fab2);
 		gameEx.setPlayers(selectedPlayers);
-		assertNotNull(gameEx.getId());
+		TestCase.assertNotNull(gameEx.getId());
 		
 		//Création d'un championnat
 		Championship ch = new Championship("Exhibition");
@@ -116,7 +116,7 @@ public class FootDAOTest extends TestCase {
 		ch.setGames(games);
 		
 		Long idch = dao.create(ch);
-		assertNotNull(idch);
+		TestCase.assertNotNull(idch);
 	}
 
 }
