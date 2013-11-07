@@ -1,5 +1,5 @@
-#Thu Sep 02 10:55:28 CEST 2010
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
+lastWarOutDir=/com.perso.footcelad.hmi/target/m2e-wtp/web-resources
 warSrcDir=src/main/webapp
-warSrcDirIsOutput=true
+warSrcDirIsOutput=false
