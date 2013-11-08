@@ -1,16 +1,14 @@
 /**
- * 
+ *
  */
 package com.perso.footcelad.core.model.championship;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,15 +22,15 @@ import com.perso.footcelad.core.model.user.Player;
 
 /**
  * @author Fabien Gautreault
- * 
+ *
  *         A team is a group of players plus a manager
- * 
+ *
  */
 @Entity
 public class Team implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
@@ -63,12 +61,13 @@ public class Team implements Serializable {
 	 * the only required parameter, we are not in the way to keep recorded all
 	 * players and manager name for all team, FSGT support give all these
 	 * information and keep it updated
-	 * 
+	 *
 	 * CELAD team will need all the information, best practice would be to keep
 	 * updated at least the manager of each team, to send FDM, contact for
 	 * anything
-	 * 
-	 * @param name : the name of the team
+	 *
+	 * @param name
+	 *            : the name of the team
 	 */
 	public Team(String name) {
 		setTeamName(name);
@@ -78,7 +77,7 @@ public class Team implements Serializable {
 
 	@Id
 	@Column(name = "TEAM_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -96,7 +95,7 @@ public class Team implements Serializable {
 		this.teamName = teamName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany()
 	@JoinTable(name = "team_players", joinColumns = @JoinColumn(name = "TEAM_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	public Set<Player> getPlayers() {
 		if (players == null) {

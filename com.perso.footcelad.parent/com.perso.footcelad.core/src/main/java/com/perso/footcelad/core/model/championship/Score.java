@@ -5,14 +5,15 @@ import java.io.Serializable;
 import com.perso.footcelad.core.model.enums.ResultType;
 
 /**
- * 
+ *
  * @author Fabien Gautreault
- * 
+ *
  *         The score give the amount of goal for each team and the type of
  *         result for the home team
- * 
+ *
  *         TODO mapping
  */
+@SuppressWarnings("serial")
 public class Score implements Serializable {
 
 	/**
@@ -49,9 +50,8 @@ public class Score implements Serializable {
 	}
 
 	public ResultType getResult() {
-		if (result == null) {
+		if (result == null)
 			return ResultType.NONE;
-		}
 		return result;
 	}
 

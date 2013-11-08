@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 
-	<bean id="footDAO" class="com.perso.footcelad.core.model.dao.FootDAOImpl" />
+	<bean id="footDaoBean" class="com.perso.footcelad.core.model.dao.FootDAOImpl" />
+	<bean id="footServicesBean"
+		class="com.perso.footcelad.core.model.services.FootServicesImpl">
+		<!-- Spring will forward footDao with same name in class FootServicesImpl -->
+		<property name="footDao" ref="footDaoBean"></property>
+	</bean>
 </beans>

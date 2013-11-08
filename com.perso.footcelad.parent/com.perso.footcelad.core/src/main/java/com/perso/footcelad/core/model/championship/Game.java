@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.perso.footcelad.core.model.championship;
 
@@ -23,14 +23,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.perso.footcelad.core.model.enums.GameType;
 import com.perso.footcelad.core.model.user.Player;
 
 /**
  * @author Fabien Gautreault
- * 
+ *
  *         A game is a meeting between two teams at a date and place
  */
+@SuppressWarnings("serial")
 @Entity
 public class Game implements Serializable {
 
@@ -81,8 +85,10 @@ public class Game implements Serializable {
 	}
 
 	/**
+	 * Amical Game
+	 *
 	 * Minimum constructor for not nullable arguments
-	 * 
+	 *
 	 * @param homeTeam
 	 *            : the team receiving
 	 * @param guestTeam
@@ -97,13 +103,38 @@ public class Game implements Serializable {
 		setGuestTeam(guestTeam);
 		setDate(gameDate);
 		setStadium(stadium);
+		setJourneyNumber(-1);
+	}
+
+	/**
+	 * Journey Game
+	 *
+	 * Minimum constructor for not nullable arguments
+	 *
+	 * @param homeTeam
+	 *            : the team receiving
+	 * @param guestTeam
+	 *            : the guest team
+	 * @param gameDate
+	 *            : the day and hour of the game
+	 * @param stadium
+	 *            : the place to play
+	 */
+	public Game(Team homeTeam, Team guestTeam, Date gameDate, Stadium stadium,
+			int journey) {
+		setHomeTeam(homeTeam);
+		setGuestTeam(guestTeam);
+		setDate(gameDate);
+		setStadium(stadium);
+		setJourneyNumber(journey);
+		setGameType(GameType.JOURNEY);
 	}
 
 	// *********************************************** Getters and setters
 
 	@Id
 	@Column(name = "GAME_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -113,7 +144,8 @@ public class Game implements Serializable {
 	}
 
 	@OneToOne
-	@JoinColumn(name = "HOME_TEAM", nullable = false, referencedColumnName="TEAM_ID")
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "HOME_TEAM", nullable = false, referencedColumnName = "TEAM_ID")
 	public Team getHomeTeam() {
 		return homeTeam;
 	}
@@ -123,7 +155,8 @@ public class Game implements Serializable {
 	}
 
 	@OneToOne
-	@JoinColumn(name = "GUEST_TEAM", nullable = false, referencedColumnName="TEAM_ID")
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "GUEST_TEAM", nullable = false, referencedColumnName = "TEAM_ID")
 	public Team getGuestTeam() {
 		return guestTeam;
 	}
@@ -146,7 +179,7 @@ public class Game implements Serializable {
 	@Enumerated(EnumType.STRING)
 	public GameType getGameType() {
 		if (gameType == null)
-			return GameType.JOURNEY;
+			return GameType.AMICAL;
 		return gameType;
 	}
 
@@ -154,7 +187,7 @@ public class Game implements Serializable {
 		this.gameType = gameType;
 	}
 
-//	@OneToOne
+	// @OneToOne
 	public Score getScore() {
 		if (score == null) {
 			score = new Score();
@@ -166,7 +199,7 @@ public class Game implements Serializable {
 		this.score = score;
 	}
 
-	@Column(name = "JOURNEY_NB", unique = true)
+	@Column(name = "JOURNEY_NB")
 	public int getJourneyNumber() {
 		return journeyNumber;
 	}
@@ -176,7 +209,8 @@ public class Game implements Serializable {
 	}
 
 	@OneToOne
-	@JoinColumn(name = "STADIUM", nullable = false, referencedColumnName="STADIUM_ID")
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "STADIUM", nullable = false, referencedColumnName = "STADIUM_ID")
 	public Stadium getStadium() {
 		return stadium;
 	}
@@ -202,17 +236,18 @@ public class Game implements Serializable {
 
 	/**
 	 * Get the combination of journey, game type and team names
-	 * 
+	 *
 	 * @return
 	 */
 	private String buildGameName() {
 		String name;
-		if (GameType.AMICAL.equals(gameType))
+		if (GameType.AMICAL.equals(gameType)) {
 			name = gameType + ": " + homeTeam.getTeamName() + " VS "
 					+ guestTeam.getTeamName();
-		else
+		} else {
 			name = gameType + " n°" + journeyNumber + ": "
 					+ homeTeam.getTeamName() + " VS " + guestTeam.getTeamName();
+		}
 		return name;
 	}
 

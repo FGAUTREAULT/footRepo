@@ -14,12 +14,13 @@ import javax.persistence.InheritanceType;
 import javax.swing.ImageIcon;
 
 /**
- * 
+ *
  * @author Fabien Gautreault
- * 
+ *
  *         The main character, contains profile information
- * 
+ *
  */
+@SuppressWarnings("serial")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
@@ -59,9 +60,13 @@ public class User implements Serializable {
 
 	/**
 	 * Minimum constructor for not nullable arguments
-	 * @param familyName 	: the family name of the user
-	 * @param firstName		: the first name of the user
-	 * @param mail			: the mail of the user
+	 *
+	 * @param familyName
+	 *            : the family name of the user
+	 * @param firstName
+	 *            : the first name of the user
+	 * @param mail
+	 *            : the mail of the user
 	 */
 	public User(String familyName, String firstName, String mail) {
 		setUserFamilyName(familyName);
@@ -73,7 +78,7 @@ public class User implements Serializable {
 
 	@Id
 	@Column(name = "USER_ID", unique = true)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -91,7 +96,7 @@ public class User implements Serializable {
 
 	/**
 	 * Set the first name and the family name
-	 * 
+	 *
 	 * @param firstName
 	 * @param familyName
 	 */

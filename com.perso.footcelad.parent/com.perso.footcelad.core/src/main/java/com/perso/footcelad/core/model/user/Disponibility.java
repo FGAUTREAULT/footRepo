@@ -15,13 +15,14 @@ import com.perso.footcelad.core.model.championship.Game;
 import com.perso.footcelad.core.model.enums.DisponibilityType;
 
 /**
- * 
+ *
  * @author Fabien Gautreault
- * 
+ *
  *         Disponibility have to be set by a player for each game for the
  *         manager to be able to build a team
- * 
+ *
  */
+@SuppressWarnings("serial")
 @Entity
 public class Disponibility implements Serializable {
 
@@ -47,9 +48,9 @@ public class Disponibility implements Serializable {
 	 */
 	public Disponibility() {
 	}
-	
+
 	// *********************************************** Getters and setters
-	
+
 	@Id
 	@Column(name = "DISPONIBILITY_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -90,7 +91,7 @@ public class Disponibility implements Serializable {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-	
+
 	// *********************************************** Hash code
 
 	@Override

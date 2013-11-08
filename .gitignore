@@ -1,0 +1,10 @@
+target/
+.classpath
+.settings/
+
+package-info.java
+*.class
+bin/
+
+.gwt/
+Thumbs.db

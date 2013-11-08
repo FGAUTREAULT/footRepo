@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.perso.footcelad.core.model.user;
 
@@ -17,16 +17,21 @@ import com.perso.footcelad.core.model.enums.PlayerType;
 
 /**
  * @author Fabien Gautreault
- * 
+ *
  *         A player is a user with following privileges:
- * 
+ *
  *         - Access to his profile,
- * 
+ *
  *         - Write disponibility,
- * 
+ *
  *         - No access to manager part.
- * 
+ *
  */
+/**
+ * @author KT006837
+ *
+ */
+@SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue("Player")
 public class Player extends User {
@@ -69,19 +74,23 @@ public class Player extends User {
 
 	/**
 	 * Default constructor
-	 * 
+	 *
 	 * All parameter can be null, easier to manage the begining of the
 	 * championship Part of the information are profile one, or will be updated
 	 * by the manager after each game
 	 */
 	public Player() {
 	}
-	
+
 	/**
 	 * Minimum constructor for not nullable arguments
-	 * @param familyName 	: the family name of the user
-	 * @param firstName		: the first name of the user
-	 * @param mail			: the mail of the user
+	 *
+	 * @param familyName
+	 *            : the family name of the user
+	 * @param firstName
+	 *            : the first name of the user
+	 * @param mail
+	 *            : the mail of the user
 	 */
 	public Player(String familyName, String firstName, String mail) {
 		setUserFamilyName(familyName);
@@ -94,8 +103,8 @@ public class Player extends User {
 	@Column(name = "PLAYER_TYPE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	public PlayerType getPlayerType() {
-		if(playerType == null) {
-			playerType = PlayerType.NONE; 
+		if (playerType == null) {
+			playerType = PlayerType.NONE;
 		}
 		return playerType;
 	}

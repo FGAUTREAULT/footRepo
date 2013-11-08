@@ -15,7 +15,8 @@
 		<property name="hibernate.use_sql_comments">true</property>
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">20</property>
-		
+		<property name="connection.pool_size">1</property>
+
 		<mapping class="com.perso.footcelad.core.model.championship.Championship" />
 		<mapping class="com.perso.footcelad.core.model.championship.Game" />
 		<mapping class="com.perso.footcelad.core.model.championship.Stadium" />

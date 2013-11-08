@@ -1,6 +1,9 @@
 package com.perso.footcelad.core.model.dao;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,12 +11,16 @@ import org.hibernate.Transaction;
 import com.perso.footcelad.core.util.HibernateUtil;
 
 /**
- * 
+ *
  * @author Fabien Gautreault
- * 
+ *
  *         Gestion of the DAO, factory, session and server transaction to create
  *         objects
- * 
+ *
+ */
+/**
+ * @author KT006837
+ *
  */
 public class FootDAOImpl implements IFootDAO {
 
@@ -47,8 +54,9 @@ public class FootDAOImpl implements IFootDAO {
 			serverTransaction.commit();
 		} catch (HibernateException e) {
 			// Avoid dead lock
-			if (serverTransaction != null)
+			if (serverTransaction != null) {
 				serverTransaction.rollback();
+			}
 			throw e;
 		} finally {
 			// Close the server transaction
@@ -71,23 +79,84 @@ public class FootDAOImpl implements IFootDAO {
 			serverTransaction.commit();
 		} catch (HibernateException e) {
 			// Avoid dead lock
-			if (serverTransaction != null)
+			if (serverTransaction != null) {
 				serverTransaction.rollback();
+			}
 			throw e;
 		} finally {
 			// Close the server transaction
 			getFootSession().close();
 		}
-		
+
 		return object;
 	}
 
 	public void update(Object o) {
 
+		try {
+			// call server
+			serverTransaction = getFootSession().beginTransaction();
+			// update reference
+			getFootSession().update(o);
+			// validate transaction and create object if thread available
+			// different => flush on session, suspend everything to create
+			// object
+			serverTransaction.commit();
+		} catch (HibernateException e) {
+			// Avoid dead lock
+			if (serverTransaction != null) {
+				serverTransaction.rollback();
+			}
+			throw e;
+		} finally {
+			// Close the server transaction
+			getFootSession().close();
+		}
+
 	}
 
 	public void delete(Object o) {
 
+		try {
+			// call server
+			serverTransaction = getFootSession().beginTransaction();
+			// delete reference
+			getFootSession().delete(o);
+			// validate transaction and create object if thread available
+			// different => flush on session, suspend everything to create
+			// object
+			serverTransaction.commit();
+		} catch (HibernateException e) {
+			// Avoid dead lock
+			if (serverTransaction != null) {
+				serverTransaction.rollback();
+			}
+			throw e;
+		} finally {
+			// Close the server transaction
+			getFootSession().close();
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> List<T> findAllObjectByClass(Class<T> theClazz) {
+		List<T> objects = null;
+
+		try {
+			serverTransaction = getFootSession().beginTransaction();
+			Query query = getFootSession().createQuery(
+					"from " + theClazz.getCanonicalName());
+			objects = query.list();
+		} catch (HibernateException hex) {
+			if (serverTransaction != null) {
+				serverTransaction.rollback();
+			}
+			throw hex;
+		} finally {
+			getFootSession().close();
+		}
+		return objects;
 	}
 
 	public SessionFactory getSessionFactory() {
@@ -103,7 +172,7 @@ public class FootDAOImpl implements IFootDAO {
 
 	/**
 	 * Create or manage a session
-	 * 
+	 *
 	 * @return
 	 */
 	public Session getFootSession() {

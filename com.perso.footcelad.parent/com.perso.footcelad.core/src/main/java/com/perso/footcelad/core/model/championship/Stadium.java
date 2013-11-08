@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.perso.footcelad.core.model.championship;
 
@@ -12,16 +12,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.groups.Default;
 
 import com.perso.footcelad.core.model.enums.StadiumType;
 
 /**
  * @author Fabien Gautreault
- * 
+ *
  *         The stadium is the place for people to play
- * 
+ *
  */
+@SuppressWarnings("serial")
 @Entity
 public class Stadium implements Serializable {
 
@@ -51,7 +51,7 @@ public class Stadium implements Serializable {
 	/**
 	 * Minimum constructor for not nullable arguments Stadium type is enum so
 	 * not null, but don't forget to update it
-	 * 
+	 *
 	 * @param stadiumName
 	 *            : The name of the stadium
 	 * @param address
@@ -63,7 +63,7 @@ public class Stadium implements Serializable {
 
 	/**
 	 * Preferred constructor
-	 * 
+	 *
 	 * @param stadiumName
 	 *            : The name of the stadium
 	 * @param address
