@@ -132,9 +132,9 @@ public interface IFootServices {
 	 * @param game
 	 */
 	public void updateAGame(Game game);
-	//
-	// public void updateAStadium();
-	//
+
+	public void updateAStadium(Stadium stadium);
+
 	// public void updateATeam();
 	//
 	// public boolean deleteAChampionship();

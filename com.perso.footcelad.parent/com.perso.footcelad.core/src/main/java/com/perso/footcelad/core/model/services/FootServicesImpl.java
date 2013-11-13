@@ -267,4 +267,27 @@ public class FootServicesImpl implements IFootServices {
 
 	}
 
+	public void updateAStadium(Stadium stadium) {
+		if (stadium != null) {
+			if (stadium.getStadiumName() != null
+					&& !stadium.getStadiumName().isEmpty()
+					&& stadium.getAddress() != null
+					&& !stadium.getAddress().isEmpty()) {
+				try {
+					footDao.update(stadium);
+					logger.info("Stadium updated: " + stadium.getId());
+				} catch (Exception ex) {
+					logger.info("Stadium update failed: " + ex.getMessage());
+				}
+
+			} else {
+				logger.info("Parameters must not be null or empty! Please check: "
+						+ "Stadium name: " + stadium.getStadiumName() + ", Address: " + stadium.getAddress()
+						+ ", Stadium track type " + stadium.getStadiumType().name());
+			}
+		} else {
+			logger.info("Stadium must not be null.");
+		}
+	}
+
 }

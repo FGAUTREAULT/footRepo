@@ -265,4 +265,29 @@ public class FootServicesTest {
 		}
 		Assert.assertNotNull(searchPlayer);
 	}
+
+	@Test
+	public void testUpdateStadium() {
+		Stadium stadium = footDao.getById(new Long(1), Stadium.class);
+		if (stadium == null) {
+			Assert.assertTrue(footservices.createAStadium("ImaginationFertile", "Rue de la paix", StadiumType.STABILISED));
+			stadium = footDao.getById(new Long(1), Stadium.class);
+			Assert.assertNotNull(stadium);
+			Assert.assertEquals("ImaginationFertile", stadium.getStadiumName());
+			Assert.assertEquals("Rue de la paix", stadium.getAddress());
+			Assert.assertEquals(StadiumType.STABILISED, stadium.getStadiumType());
+		}
+
+		stadium.setStadiumName("Alice");
+		stadium.setaddress("Au pays des merveilles");
+		stadium.setStadiumType(StadiumType.GRASS);
+
+		footservices.updateAStadium(stadium);
+
+		Stadium stadiumUpdated = footDao.getById(new Long(1), Stadium.class);
+
+		Assert.assertEquals(stadium.getStadiumName(), stadiumUpdated.getStadiumName());
+		Assert.assertEquals(stadium.getAddress(), stadiumUpdated.getAddress());
+		Assert.assertEquals(stadium.getStadiumType(), stadiumUpdated.getStadiumType());
+	}
 }

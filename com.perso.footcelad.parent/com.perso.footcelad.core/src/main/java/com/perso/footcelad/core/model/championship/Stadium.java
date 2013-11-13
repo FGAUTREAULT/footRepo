@@ -112,7 +112,7 @@ public class Stadium implements Serializable {
 	}
 
 	@Column(name = "STADIUM_ADDRESS", nullable = false)
-	public String getaddress() {
+	public String getAddress() {
 		return address;
 	}
 
