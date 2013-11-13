@@ -5,9 +5,12 @@ package com.perso.footcelad.core.model.services;
 
 import java.util.Date;
 
+import com.perso.footcelad.core.model.championship.Championship;
+import com.perso.footcelad.core.model.championship.Game;
 import com.perso.footcelad.core.model.championship.Stadium;
 import com.perso.footcelad.core.model.championship.Team;
 import com.perso.footcelad.core.model.enums.StadiumType;
+import com.perso.footcelad.core.model.user.Player;
 
 /**
  * @author Fabien O
@@ -42,11 +45,16 @@ public interface IFootServices {
 			String mail);
 
 	/**
-	 *Service method to create an amical game
-	 * @param homeTeam	: The home team
-	 * @param guestTeam	: The guest team
-	 * @param gameDate	: The date of the game
-	 * @param stadium	: The place to play
+	 * Service method to create an amical game
+	 *
+	 * @param homeTeam
+	 *            : The home team
+	 * @param guestTeam
+	 *            : The guest team
+	 * @param gameDate
+	 *            : The date of the game
+	 * @param stadium
+	 *            : The place to play
 	 * @return
 	 */
 	public boolean createAmicalGame(Team homeTeam, Team guestTeam,
@@ -54,11 +62,17 @@ public interface IFootServices {
 
 	/**
 	 * Service method to create a journey game
-	 * @param homeTeam	: The home team
-	 * @param guestTeam	: The guest team
-	 * @param gameDate	: The date of the game
-	 * @param stadium	: The place to play
-	 * @param journey	: The journey number
+	 *
+	 * @param homeTeam
+	 *            : The home team
+	 * @param guestTeam
+	 *            : The guest team
+	 * @param gameDate
+	 *            : The date of the game
+	 * @param stadium
+	 *            : The place to play
+	 * @param journey
+	 *            : The journey number
 	 * @return
 	 */
 	public boolean createJourneyGame(Team homeTeam, Team guestTeam,
@@ -66,28 +80,58 @@ public interface IFootServices {
 
 	/**
 	 * Service method to create a stadium
-	 * @param stadiumName	: The stadium name
-	 * @param address		: The address of the stadium
-	 * @param stadiumType	: The type of track
+	 *
+	 * @param stadiumName
+	 *            : The stadium name
+	 * @param address
+	 *            : The address of the stadium
+	 * @param stadiumType
+	 *            : The type of track
 	 * @return
 	 */
-	public boolean createAStadium(String stadiumName, String address, StadiumType stadiumType);
+	public boolean createAStadium(String stadiumName, String address,
+			StadiumType stadiumType);
 
 	/**
 	 * Service method to create a stadium with unknown type track
-	 * @param stadiumName	: The stadium name
-	 * @param address		: The address of the stadium
+	 *
+	 * @param stadiumName
+	 *            : The stadium name
+	 * @param address
+	 *            : The address of the stadium
 	 * @return
 	 */
 	public boolean createAStadium(String stadiumName, String address);
 
-	// public boolean createATeam();
-	//
-	// public void updateAChampionship();
-	//
-	// public void updateAPlayer();
-	//
-	// public void updateAGame();
+	/**
+	 * Service method to create a team
+	 *
+	 * @param teamName
+	 *            : the name of the team
+	 * @return
+	 */
+	public boolean createATeam(String teamName);
+
+	/**
+	 * Service method to update a {@link Championship}
+	 *
+	 * @param championship
+	 */
+	public void updateAChampionship(Championship championship);
+
+	/**
+	 * Service method to update a {@link Player}
+	 *
+	 * @param player
+	 */
+	public void updateAPlayer(Player player);
+
+	/**
+	 * Service method to update a {@link Game}
+	 *
+	 * @param game
+	 */
+	public void updateAGame(Game game);
 	//
 	// public void updateAStadium();
 	//

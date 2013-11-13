@@ -11,7 +11,11 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.perso.footcelad.core.model.enums.PlayerType;
 
@@ -149,7 +153,8 @@ public class Player extends User {
 		this.nbWash = nbWash;
 	}
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	public Set<Disponibility> getDisponibilities() {
 		if (disponibilities == null) {
 			disponibilities = new HashSet<Disponibility>();

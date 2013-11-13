@@ -22,6 +22,26 @@ import com.perso.footcelad.core.model.user.Player;
  * @author KT006837
  *
  */
+/**
+ * @author KT006837
+ *
+ */
+/**
+ * @author KT006837
+ *
+ */
+/**
+ * @author KT006837
+ *
+ */
+/**
+ * @author KT006837
+ *
+ */
+/**
+ * @author KT006837
+ *
+ */
 public class FootServicesImpl implements IFootServices {
 
 	private final Logger logger = Logger.getLogger(FootServicesImpl.class
@@ -36,6 +56,13 @@ public class FootServicesImpl implements IFootServices {
 	 *
 	 */
 	public FootServicesImpl() {
+	}
+
+	/**
+	 * @return the footDao
+	 */
+	public IFootDAO getFootDao() {
+		return footDao;
 	}
 
 	/**
@@ -142,10 +169,102 @@ public class FootServicesImpl implements IFootServices {
 			}
 		} else {
 			logger.info("Parameters must not be null or empty! Please check: "
-					+ "Stadium name: " + stadiumName + ", Address: " + address + ", Stadium track type " + stadiumType.name());
+					+ "Stadium name: " + stadiumName + ", Address: " + address
+					+ ", Stadium track type " + stadiumType.name());
 		}
 
 		return false;
+	}
+
+	public boolean createATeam(String teamName) {
+
+		if (teamName != null && !teamName.isEmpty()) {
+			Team team = new Team(teamName);
+			Long idTeam = footDao.create(team);
+			if (idTeam != null) {
+				logger.info("Team created : " + idTeam);
+				return true;
+			} else {
+				logger.info("Team creation failed " + idTeam);
+			}
+		} else {
+			logger.info("Team name must not be null or empty." + "Team name: "
+					+ teamName);
+		}
+		return false;
+	}
+
+	public void updateAChampionship(Championship championship) {
+		if (championship != null) {
+			if (championship.getChampionshipName() != null
+					&& !"".equals(championship.getChampionshipName())) {
+				try {
+					footDao.update(championship);
+					logger.info("Championship updated: " + championship.getId());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					logger.info("Championship update failed: "
+							+ ex.getMessage());
+				}
+
+			} else {
+				logger.info("Championship name must not be null or empty: "
+						+ championship.getChampionshipName());
+			}
+		} else {
+			logger.info("Championship must not be null. ");
+		}
+	}
+
+	public void updateAPlayer(Player player) {
+		if (player != null) {
+			if (player.getUserFamilyName() != null
+					&& !"".equals(player.getUserFamilyName())
+					&& player.getUserFirstName() != null
+					&& !"".equals(player.getUserFirstName())
+					&& player.getMail() != null && !"".equals(player.getMail())) {
+				try {
+					footDao.update(player);
+					logger.info("Player updated: " + player.getId());
+				} catch (Exception ex) {
+					logger.info("Player update failed: " + ex.getMessage());
+				}
+
+			} else {
+				logger.info("Player family name, first name and mail must not be null or empty: "
+						+ "Family name: "
+						+ player.getUserFamilyName()
+						+ ", First name: "
+						+ player.getUserFirstName()
+						+ ", Mail: " + player.getMail());
+			}
+		} else {
+			logger.info("Player must not be null.");
+		}
+	}
+
+	public void updateAGame(Game game) {
+		if (game != null) {
+			if (game.getDate() != null && game.getGuestTeam() != null
+					&& game.getHomeTeam() != null && game.getStadium() != null) {
+				try {
+					footDao.update(game);
+					logger.info("Game updated: " + game.getId());
+				} catch (Exception ex) {
+					logger.info("Game update failed: " + ex.getMessage());
+				}
+
+			} else {
+				logger.info("Parameters must not be null! Please check: "
+						+ "Home team : " + game.getHomeTeam()
+						+ " Guest team : " + game.getGuestTeam()
+						+ " Game Date : " + game.getDate() + " Stadium : "
+						+ game.getStadium());
+			}
+		} else {
+			logger.info("Game must not be null.");
+		}
+
 	}
 
 }

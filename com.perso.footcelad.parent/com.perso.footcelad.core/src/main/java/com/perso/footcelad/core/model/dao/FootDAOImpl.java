@@ -2,12 +2,17 @@ package com.perso.footcelad.core.model.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.perso.footcelad.core.model.championship.Championship;
+import com.perso.footcelad.core.model.championship.Game;
+import com.perso.footcelad.core.model.championship.Team;
+import com.perso.footcelad.core.model.user.Player;
 import com.perso.footcelad.core.util.HibernateUtil;
 
 /**
@@ -76,6 +81,7 @@ public class FootDAOImpl implements IFootDAO {
 			// validate transaction and create object if thread available
 			// different => flush on session, suspend everything to create
 			// object
+			initializeChilds(object);
 			serverTransaction.commit();
 		} catch (HibernateException e) {
 			// Avoid dead lock
@@ -89,6 +95,24 @@ public class FootDAOImpl implements IFootDAO {
 		}
 
 		return object;
+	}
+
+	/**
+	 * Initialize collections of childs
+	 * @param object : the parent
+	 */
+	private void initializeChilds(Object object) {
+		if (object instanceof Championship) {
+			Hibernate.initialize(((Championship) object).getTeams());
+			Hibernate.initialize(((Championship) object).getGames());
+			Hibernate.initialize(((Championship) object).getStadiums());
+		} else if (object instanceof Team) {
+			Hibernate.initialize(((Team) object).getPlayers());
+		} else if (object instanceof Game) {
+			Hibernate.initialize(((Game) object).getPlayers());
+		} else if (object instanceof Player) {
+			Hibernate.initialize(((Player) object).getDisponibilities());
+		}
 	}
 
 	public void update(Object o) {

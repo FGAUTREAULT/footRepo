@@ -53,7 +53,7 @@ public class Disponibility implements Serializable {
 
 	@Id
 	@Column(name = "DISPONIBILITY_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -101,7 +101,10 @@ public class Disponibility implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return id.hashCode();
-	}
+		if (id != null)
+			return 31 + id.hashCode();
+		else
+			return 31 + getDisponibility().name().hashCode();
 
+	}
 }

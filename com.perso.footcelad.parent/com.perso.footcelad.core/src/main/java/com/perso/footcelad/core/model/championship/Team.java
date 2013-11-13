@@ -17,6 +17,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.perso.footcelad.core.model.user.Manager;
 import com.perso.footcelad.core.model.user.Player;
 
@@ -95,7 +98,10 @@ public class Team implements Serializable {
 		this.teamName = teamName;
 	}
 
-	@OneToMany()
+	@OneToMany(cascade = {
+			javax.persistence.CascadeType.PERSIST,
+			javax.persistence.CascadeType.MERGE })
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinTable(name = "team_players", joinColumns = @JoinColumn(name = "TEAM_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	public Set<Player> getPlayers() {
 		if (players == null) {

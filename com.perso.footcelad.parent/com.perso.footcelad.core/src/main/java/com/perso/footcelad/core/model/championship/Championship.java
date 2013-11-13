@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.perso.footcelad.core.model.championship;
 
@@ -18,9 +18,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 /**
  * @author Fabien Gautreault
- * 
+ *
  *         The championship is a group of games regarding a list a teams playing
  *         together We are not in the way to reproduce the complete championship
  *         FSGT support give all these informations
@@ -29,7 +32,7 @@ import javax.persistence.OneToMany;
 public class Championship implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -20406947726161183L;
 
@@ -62,7 +65,7 @@ public class Championship implements Serializable {
 
 	/**
 	 * Minimum constructor for not nullable arguments
-	 * 
+	 *
 	 * @param name
 	 *            : name of the chamionship
 	 */
@@ -72,7 +75,10 @@ public class Championship implements Serializable {
 
 	// *********************************************** Getters and setters
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = {
+			javax.persistence.CascadeType.PERSIST,
+			javax.persistence.CascadeType.MERGE })
+	@Cascade({ CascadeType.SAVE_UPDATE })
 	@JoinTable(name = "championship_game", joinColumns = @JoinColumn(name = "CHAMPIONSHIP_ID"), inverseJoinColumns = @JoinColumn(name = "GAME_ID"))
 	public Set<Game> getGames() {
 		if (games == null) {
@@ -85,7 +91,10 @@ public class Championship implements Serializable {
 		this.games = games;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = {
+			javax.persistence.CascadeType.PERSIST,
+			javax.persistence.CascadeType.MERGE })
+	@Cascade({ CascadeType.REPLICATE })
 	@JoinTable(name = "championship_team", joinColumns = @JoinColumn(name = "CHAMPIONSHIP_ID"), inverseJoinColumns = @JoinColumn(name = "TEAM_ID"))
 	public Set<Team> getTeams() {
 		if (teams == null) {
@@ -98,7 +107,10 @@ public class Championship implements Serializable {
 		this.teams = teams;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {
+			javax.persistence.CascadeType.PERSIST,
+			javax.persistence.CascadeType.MERGE })
+	@Cascade({ CascadeType.REPLICATE })
 	@JoinTable(name = "championship_stadium", joinColumns = @JoinColumn(name = "CHAMPIONSHIP_ID"), inverseJoinColumns = @JoinColumn(name = "STADIUM_ID"))
 	public Set<Stadium> getStadiums() {
 		if (stadiums == null) {

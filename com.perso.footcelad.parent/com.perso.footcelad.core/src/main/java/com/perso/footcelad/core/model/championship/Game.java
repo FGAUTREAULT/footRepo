@@ -220,6 +220,7 @@ public class Game implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY)
+	@Cascade(CascadeType.SAVE_UPDATE)
 	@JoinTable(name = "game_player", joinColumns = @JoinColumn(name = "GAME_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
 	public Set<Player> getPlayers() {
 		if (players == null) {
