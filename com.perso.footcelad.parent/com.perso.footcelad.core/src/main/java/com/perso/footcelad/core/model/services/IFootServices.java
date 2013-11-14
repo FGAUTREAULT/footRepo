@@ -28,7 +28,7 @@ public interface IFootServices {
 	 *
 	 * @return
 	 */
-	public boolean createAChampionship(String csName);
+	public Long createAChampionship(String csName);
 
 	/**
 	 * Service method to create a Player
@@ -41,7 +41,7 @@ public interface IFootServices {
 	 *            : The mail of the player
 	 * @return
 	 */
-	public boolean createAPlayer(String familyName, String firstName,
+	public Long createAPlayer(String familyName, String firstName,
 			String mail);
 
 	/**
@@ -57,7 +57,7 @@ public interface IFootServices {
 	 *            : The place to play
 	 * @return
 	 */
-	public boolean createAmicalGame(Team homeTeam, Team guestTeam,
+	public Long createAmicalGame(Team homeTeam, Team guestTeam,
 			Date gameDate, Stadium stadium);
 
 	/**
@@ -75,7 +75,7 @@ public interface IFootServices {
 	 *            : The journey number
 	 * @return
 	 */
-	public boolean createJourneyGame(Team homeTeam, Team guestTeam,
+	public Long createJourneyGame(Team homeTeam, Team guestTeam,
 			Date gameDate, Stadium stadium, int journey);
 
 	/**
@@ -89,7 +89,7 @@ public interface IFootServices {
 	 *            : The type of track
 	 * @return
 	 */
-	public boolean createAStadium(String stadiumName, String address,
+	public Long createAStadium(String stadiumName, String address,
 			StadiumType stadiumType);
 
 	/**
@@ -101,7 +101,7 @@ public interface IFootServices {
 	 *            : The address of the stadium
 	 * @return
 	 */
-	public boolean createAStadium(String stadiumName, String address);
+	public Long createAStadium(String stadiumName, String address);
 
 	/**
 	 * Service method to create a team
@@ -110,7 +110,7 @@ public interface IFootServices {
 	 *            : the name of the team
 	 * @return
 	 */
-	public boolean createATeam(String teamName);
+	public Long createATeam(String teamName);
 
 	/**
 	 * Service method to update a {@link Championship}
@@ -133,18 +133,53 @@ public interface IFootServices {
 	 */
 	public void updateAGame(Game game);
 
+	/**
+	 * Service method to update a {@link Stadium}
+	 *
+	 * @param stadium
+	 */
 	public void updateAStadium(Stadium stadium);
 
-	// public void updateATeam();
-	//
-	// public boolean deleteAChampionship();
-	//
-	// public boolean deleteAPlayer();
-	//
-	// public boolean deleteAGame();
-	//
-	// public boolean deleteAStadium();
-	//
-	// public boolean deleteATeam();
+	/**
+	 * Service method to update a {@link Team}
+	 *
+	 * @param team
+	 */
+	public void updateATeam(Team team);
+
+	/**
+	 * Service method to delete a {@link Championship}
+	 * @param championship
+	 * @return
+	 */
+	public boolean deleteAChampionship(Championship championship);
+
+	/**
+	 * Service method to delete a {@link Player}
+	 * @param player
+	 * @return
+	 */
+	public boolean deleteAPlayer(Player player);
+
+	/**
+	 * Service method to delete a {@link Game}
+	 * @param game
+	 * @return
+	 */
+	public boolean deleteAGame(Game game);
+
+	/**
+	 * Service method to delete a {@link Stadium}
+	 * @param stadium
+	 * @return
+	 */
+	public boolean deleteAStadium(Stadium stadium);
+
+	/**
+	 * Service method to delete a {@link Team}
+	 * @param team
+	 * @return
+	 */
+	public boolean deleteATeam(Team team);
 
 }

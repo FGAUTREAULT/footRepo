@@ -46,57 +46,61 @@ public class FootServicesTest {
 
 	@Test
 	public void testCreateChampionship() {
-		Assert.assertFalse(footservices.createAChampionship(""));
-		Assert.assertFalse(footservices.createAChampionship(null));
-		Assert.assertTrue(footservices.createAChampionship("PMT"));
+		Assert.assertNull(footservices.createAChampionship(""));
+		Assert.assertNull(footservices.createAChampionship(null));
+		Assert.assertNotNull(footservices.createAChampionship("PMT"));
 	}
 
 	@Test
 	public void testCreatePlayer() {
-		Assert.assertFalse(footservices.createAPlayer("", "Fab",
-				"fab@gmail.com"));
-		Assert.assertFalse(footservices.createAPlayer("Pegdwende", null,
+		Assert.assertNull(footservices
+				.createAPlayer("", "Fab", "fab@gmail.com"));
+		Assert.assertNull(footservices.createAPlayer("Pegdwende", null,
 				"pegdwendenull@gmail.com"));
-		Assert.assertTrue(footservices.createAPlayer("Inho", "Fab",
+		Assert.assertNotNull(footservices.createAPlayer("Inho", "Fab",
 				"fabinho@gmail.com"));
 	}
 
 	@Test
 	public void testCreateGame() {
-		Assert.assertFalse(footservices.createAmicalGame(null, new Team(
+		Assert.assertNull(footservices.createAmicalGame(null, new Team(
 				"MomoTeam"), new Date(), new Stadium("SAFRAN",
 				"20 chemin laporte", StadiumType.STABILISED)));
-		Assert.assertTrue(footservices.createAmicalGame(new Team("DupouyTeam"),
-				new Team("NabilaTeam"), new Date(), new Stadium("Jonquera",
-						"2 chemin des bois", StadiumType.GRASS)));
-		Assert.assertTrue(footservices.createJourneyGame(
-				new Team("CricriTeam"), new Team("SylvainTeam"), new Date(),
+		Assert.assertNotNull(footservices.createAmicalGame(new Team(
+				"DupouyTeam"), new Team("NabilaTeam"), new Date(), new Stadium(
+				"Jonquera", "2 chemin des bois", StadiumType.GRASS)));
+		Assert.assertNotNull(footservices.createJourneyGame(new Team(
+				"CricriTeam"), new Team("SylvainTeam"), new Date(),
 				new Stadium("AIRBUS STADIUM", "12 passage gay",
 						StadiumType.SYNTHETIC), 1));
 	}
 
 	@Test
 	public void testCreateStadium() {
-		Assert.assertFalse(footservices.createAStadium("", "",
-				StadiumType.GRASS));
-		Assert.assertFalse(footservices.createAStadium(null, ""));
-		Assert.assertTrue(footservices.createAStadium("Camp Nou", "Carrera",
+		Assert.assertNull(footservices
+				.createAStadium("", "", StadiumType.GRASS));
+		Assert.assertNull(footservices.createAStadium(null, ""));
+		Assert.assertNotNull(footservices.createAStadium("Camp Nou", "Carrera",
 				StadiumType.GRASS));
 	}
 
 	@Test
 	public void testCreateTeam() {
-		Assert.assertFalse(footservices.createATeam(""));
-		Assert.assertFalse(footservices.createATeam(null));
-		Assert.assertTrue(footservices.createATeam("CE CELAD 2"));
+		Assert.assertNull(footservices.createATeam(""));
+		Assert.assertNull(footservices.createATeam(null));
+		Assert.assertNotNull(footservices.createATeam("CE CELAD 2"));
 	}
 
 	@Test
 	public void testUpdateChampionship() {
-		Championship chship = footDao.getById(new Long(1), Championship.class);
+		Long idCh = new Long(1);
+
+		Championship chship = footDao.getById(idCh, Championship.class);
+
 		if (chship == null) {
-			Assert.assertTrue(footservices.createAChampionship("BlablaCar"));
-			chship = footDao.getById(new Long(1), Championship.class);
+			idCh = footservices.createAChampionship("BlablaCar");
+			Assert.assertNotNull(idCh);
+			chship = footDao.getById(idCh, Championship.class);
 			Assert.assertEquals(chship.getChampionshipName(), "BlablaCar");
 
 		}
@@ -142,8 +146,7 @@ public class FootServicesTest {
 
 		footservices.updateAChampionship(chship);
 
-		Championship chpshipUpdated = footDao.getById(new Long(1),
-				Championship.class);
+		Championship chpshipUpdated = footDao.getById(idCh, Championship.class);
 		Assert.assertEquals("Concon", chpshipUpdated.getChampionshipName());
 
 		Team searchTeamFirst = null;
@@ -189,7 +192,7 @@ public class FootServicesTest {
 	public void testUpdatePlayer() {
 		Player player = footDao.getById(new Long(1), Player.class);
 		if (player == null) {
-			Assert.assertTrue(footservices.createAPlayer("Family", "First",
+			Assert.assertNotNull(footservices.createAPlayer("Family", "First",
 					"mail"));
 			player = footDao.getById(new Long(1), Player.class);
 			Assert.assertEquals(player.getUserFamilyName(), "Family");
@@ -231,9 +234,9 @@ public class FootServicesTest {
 	public void testUpdateGame() {
 		Game game = footDao.getById(new Long(1), Game.class);
 		if (game == null) {
-			Assert.assertTrue(footservices.createAmicalGame(new Team("Tarin"),
-					new Team("Tarascon"), new Date(), new Stadium("Soutenance",
-							"CNRS")));
+			Assert.assertNotNull(footservices.createAmicalGame(
+					new Team("Tarin"), new Team("Tarascon"), new Date(),
+					new Stadium("Soutenance", "CNRS")));
 			game = footDao.getById(new Long(1), Game.class);
 			Assert.assertNotNull(game.getHomeTeam());
 			Assert.assertNotNull(game.getGuestTeam());
@@ -270,12 +273,15 @@ public class FootServicesTest {
 	public void testUpdateStadium() {
 		Stadium stadium = footDao.getById(new Long(1), Stadium.class);
 		if (stadium == null) {
-			Assert.assertTrue(footservices.createAStadium("ImaginationFertile", "Rue de la paix", StadiumType.STABILISED));
+			Assert.assertNotNull(footservices.createAStadium(
+					"ImaginationFertile", "Rue de la paix",
+					StadiumType.STABILISED));
 			stadium = footDao.getById(new Long(1), Stadium.class);
 			Assert.assertNotNull(stadium);
 			Assert.assertEquals("ImaginationFertile", stadium.getStadiumName());
 			Assert.assertEquals("Rue de la paix", stadium.getAddress());
-			Assert.assertEquals(StadiumType.STABILISED, stadium.getStadiumType());
+			Assert.assertEquals(StadiumType.STABILISED,
+					stadium.getStadiumType());
 		}
 
 		stadium.setStadiumName("Alice");
@@ -286,8 +292,96 @@ public class FootServicesTest {
 
 		Stadium stadiumUpdated = footDao.getById(new Long(1), Stadium.class);
 
-		Assert.assertEquals(stadium.getStadiumName(), stadiumUpdated.getStadiumName());
+		Assert.assertEquals(stadium.getStadiumName(),
+				stadiumUpdated.getStadiumName());
 		Assert.assertEquals(stadium.getAddress(), stadiumUpdated.getAddress());
-		Assert.assertEquals(stadium.getStadiumType(), stadiumUpdated.getStadiumType());
+		Assert.assertEquals(stadium.getStadiumType(),
+				stadiumUpdated.getStadiumType());
+	}
+
+	@Test
+	public void testUpdateTeam() {
+		Team team = footDao.getById(new Long(1), Team.class);
+		if (team == null) {
+			Assert.assertNotNull(footservices
+					.createATeam("Ma team a moi con***d"));
+			team = footDao.getById(new Long(1), Team.class);
+			Assert.assertNotNull(team);
+			Assert.assertEquals("Ma team a moi con***d", team.getTeamName());
+		}
+
+		team.setTeamName("Pourquoi?");
+
+		Player playerFirst = new Player("Gautreault", "Fafa", "go@saoul.fr");
+		Player playerSecond = new Player("OUEDRAOGO", "Asso", "be@dead.fr");
+		Set<Player> listPlayers = new HashSet<Player>(team.getPlayers());
+		listPlayers.add(playerFirst);
+		listPlayers.add(playerSecond);
+		team.setPlayers(listPlayers);
+
+		footservices.updateATeam(team);
+
+		Team teamUpdated = footDao.getById(new Long(1), Team.class);
+
+		Assert.assertEquals(team.getTeamName(), teamUpdated.getTeamName());
+
+		Player searchPlayer = null;
+		for (Player p : teamUpdated.getPlayers()) {
+			if (p.equals(playerFirst)) {
+				searchPlayer = p;
+			}
+		}
+		Assert.assertNotNull(searchPlayer);
+	}
+
+	@Test
+	public void testDeleteChampionship() {
+		Long idCh = footservices.createAChampionship("Obama");
+		Assert.assertNotNull(idCh);
+		Championship chship = footDao.getById(idCh, Championship.class);
+		Assert.assertEquals(chship.getChampionshipName(), "Obama");
+
+		Assert.assertTrue(footservices.deleteAChampionship(chship));
+	}
+
+	@Test
+	public void testDeletePlayer() {
+
+		Long idPlayer = footservices.createAPlayer("Go", "Pro", "e-mail@fr");
+		Assert.assertNotNull(idPlayer);
+		Player player = footDao.getById(idPlayer, Player.class);
+		Assert.assertEquals(player.getUserFamilyName(), "Go");
+		Assert.assertEquals(player.getUserFirstName(), "Pro");
+		Assert.assertEquals(player.getMail(), "e-mail@fr");
+
+		Assert.assertTrue(footservices.deleteAPlayer(player));
+	}
+
+	@Test
+	public void testDeleteGame() {
+		Long idGame = footservices.createAmicalGame(new Team("CElad"),
+				new Team("Konamis"), new Date(), new Stadium("Gd Plaine",
+						"Balma Gramont"));
+		Assert.assertNotNull(idGame);
+		Game game = footDao.getById(idGame, Game.class);
+		Assert.assertNotNull(game.getHomeTeam());
+		Assert.assertNotNull(game.getGuestTeam());
+		Assert.assertNotNull(game.getStadium());
+
+		Assert.assertTrue(footservices.deleteAGame(game));
+	}
+
+	@Test
+	public void testDeleteStadium() {
+		Long idStadium = footservices.createAStadium("TOAC", "Rue de airbus",
+				StadiumType.STABILISED);
+		Assert.assertNotNull(idStadium);
+		Stadium stadium = footDao.getById(idStadium, Stadium.class);
+		Assert.assertNotNull(stadium);
+		Assert.assertEquals("TOAC", stadium.getStadiumName());
+		Assert.assertEquals("Rue de airbus", stadium.getAddress());
+		Assert.assertEquals(StadiumType.STABILISED, stadium.getStadiumType());
+
+		Assert.assertTrue(footservices.deleteAStadium(stadium));
 	}
 }

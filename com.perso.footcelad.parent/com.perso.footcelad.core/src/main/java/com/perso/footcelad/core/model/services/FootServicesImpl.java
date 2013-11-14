@@ -15,31 +15,7 @@ import com.perso.footcelad.core.model.enums.StadiumType;
 import com.perso.footcelad.core.model.user.Player;
 
 /**
- * @author KT006837
- *
- */
-/**
- * @author KT006837
- *
- */
-/**
- * @author KT006837
- *
- */
-/**
- * @author KT006837
- *
- */
-/**
- * @author KT006837
- *
- */
-/**
- * @author KT006837
- *
- */
-/**
- * @author KT006837
+ * @author Fabiensssssssssss
  *
  */
 public class FootServicesImpl implements IFootServices {
@@ -73,13 +49,13 @@ public class FootServicesImpl implements IFootServices {
 		this.footDao = footDao;
 	}
 
-	public boolean createAChampionship(String csName) {
+	public Long createAChampionship(String csName) {
 		if (csName != null && !"".equals(csName)) {
 			Championship champship = new Championship(csName);
 			Long id = footDao.create(champship);
 			if (id != null) {
 				logger.info("Championship created: " + id);
-				return true;
+				return id;
 			} else {
 				logger.info("Championship creation failed: " + csName);
 			}
@@ -88,10 +64,10 @@ public class FootServicesImpl implements IFootServices {
 					+ csName);
 		}
 
-		return false;
+		return null;
 	}
 
-	public boolean createAPlayer(String familyName, String firstName,
+	public Long createAPlayer(String familyName, String firstName,
 			String mail) {
 
 		if (familyName != null && !"".equals(familyName) && firstName != null
@@ -100,7 +76,7 @@ public class FootServicesImpl implements IFootServices {
 			Long id = footDao.create(player);
 			if (id != null) {
 				logger.info("Player created: " + id);
-				return true;
+				return id;
 			} else {
 				logger.info("Player creation failed: " + "Family name: "
 						+ familyName + ", First name: " + firstName
@@ -114,15 +90,15 @@ public class FootServicesImpl implements IFootServices {
 					+ ", First name: "
 					+ firstName + ", Mail: " + mail);
 		}
-		return false;
+		return null;
 	}
 
-	public boolean createAmicalGame(Team homeTeam, Team guestTeam,
+	public Long createAmicalGame(Team homeTeam, Team guestTeam,
 			Date gameDate, Stadium stadium) {
 		return createJourneyGame(homeTeam, guestTeam, gameDate, stadium, -1);
 	}
 
-	public boolean createJourneyGame(Team homeTeam, Team guestTeam,
+	public Long createJourneyGame(Team homeTeam, Team guestTeam,
 			Date gameDate, Stadium stadium, int journey) {
 		if (homeTeam != null && guestTeam != null && gameDate != null
 				&& stadium != null) {
@@ -135,7 +111,7 @@ public class FootServicesImpl implements IFootServices {
 			Long idGame = footDao.create(game);
 			if (idGame != null) {
 				logger.info("Game created : " + idGame);
-				return true;
+				return idGame;
 			} else {
 				logger.info("Game creation failed " + idGame);
 				logger.info("Please check Entities(homeTeam, guestTeam and stadium) for non nullable parameters ...");
@@ -146,14 +122,14 @@ public class FootServicesImpl implements IFootServices {
 					+ " Game Date : " + gameDate + " Stadium : " + stadium);
 		}
 
-		return false;
+		return null;
 	}
 
-	public boolean createAStadium(String stadiumName, String address) {
+	public Long createAStadium(String stadiumName, String address) {
 		return createAStadium(stadiumName, address, StadiumType.UNKNOWN);
 	}
 
-	public boolean createAStadium(String stadiumName, String address,
+	public Long createAStadium(String stadiumName, String address,
 			StadiumType stadiumType) {
 
 		if (stadiumName != null && !stadiumName.isEmpty() && address != null
@@ -162,7 +138,7 @@ public class FootServicesImpl implements IFootServices {
 			Long idStadium = footDao.create(stadium);
 			if (idStadium != null) {
 				logger.info("Stadium created : " + idStadium);
-				return true;
+				return idStadium;
 			} else {
 				logger.info("Stadium creation failed " + idStadium);
 				logger.info("Please check Entity stadium for non nullable parameters ...");
@@ -173,17 +149,17 @@ public class FootServicesImpl implements IFootServices {
 					+ ", Stadium track type " + stadiumType.name());
 		}
 
-		return false;
+		return null;
 	}
 
-	public boolean createATeam(String teamName) {
+	public Long createATeam(String teamName) {
 
 		if (teamName != null && !teamName.isEmpty()) {
 			Team team = new Team(teamName);
 			Long idTeam = footDao.create(team);
 			if (idTeam != null) {
 				logger.info("Team created : " + idTeam);
-				return true;
+				return idTeam;
 			} else {
 				logger.info("Team creation failed " + idTeam);
 			}
@@ -191,7 +167,7 @@ public class FootServicesImpl implements IFootServices {
 			logger.info("Team name must not be null or empty." + "Team name: "
 					+ teamName);
 		}
-		return false;
+		return null;
 	}
 
 	public void updateAChampionship(Championship championship) {
@@ -282,12 +258,110 @@ public class FootServicesImpl implements IFootServices {
 
 			} else {
 				logger.info("Parameters must not be null or empty! Please check: "
-						+ "Stadium name: " + stadium.getStadiumName() + ", Address: " + stadium.getAddress()
-						+ ", Stadium track type " + stadium.getStadiumType().name());
+						+ "Stadium name: "
+						+ stadium.getStadiumName()
+						+ ", Address: "
+						+ stadium.getAddress()
+						+ ", Stadium track type "
+						+ stadium.getStadiumType().name());
 			}
 		} else {
 			logger.info("Stadium must not be null.");
 		}
+	}
+
+	public void updateATeam(Team team) {
+		if (team != null) {
+			if (team.getTeamName() != null && !team.getTeamName().isEmpty()) {
+				try {
+					footDao.update(team);
+					logger.info("Team updated: " + team.getId());
+				} catch (Exception ex) {
+					logger.info("Team update failed: " + ex.getMessage());
+				}
+
+			} else {
+				logger.info("Team name must not be null or empty."
+						+ "Team name: " + team.getTeamName());
+			}
+		} else {
+			logger.info("Team must not be null.");
+		}
+	}
+
+	public boolean deleteAChampionship(Championship championship) {
+		if (championship != null) {
+			try {
+				footDao.delete(championship);
+				logger.info("Championship deleted: " + championship.getId());
+				return true;
+			} catch (Exception ex) {
+				logger.info("Championship delete failed: " + ex.getMessage());
+			}
+		} else {
+			logger.info("Championship must not be null.");
+		}
+		return false;
+	}
+
+	public boolean deleteAPlayer(Player player) {
+		if (player != null) {
+			try {
+				footDao.delete(player);
+				logger.info("Player deleted: " + player.getId());
+				return true;
+			} catch (Exception ex) {
+				logger.info("Player delete failed: " + ex.getMessage());
+			}
+		} else {
+			logger.info("Player must not be null.");
+		}
+		return false;
+	}
+
+	public boolean deleteAGame(Game game) {
+		if (game != null) {
+			try {
+				footDao.delete(game);
+				logger.info("Game deleted: " + game.getId());
+				return true;
+			} catch (Exception ex) {
+				logger.info("Game delete failed: " + ex.getMessage());
+			}
+		} else {
+			logger.info("Game must not be null.");
+		}
+		return false;
+	}
+
+	public boolean deleteAStadium(Stadium stadium) {
+		if (stadium != null) {
+			try {
+				footDao.delete(stadium);
+				logger.info("Stadium deleted: " + stadium.getId());
+				return true;
+			} catch (Exception ex) {
+				logger.info("Stadium delete failed: " + ex.getMessage());
+			}
+		} else {
+			logger.info("Stadium must not be null.");
+		}
+		return false;
+	}
+
+	public boolean deleteATeam(Team team) {
+		if (team != null) {
+			try {
+				footDao.delete(team);
+				logger.info("Team deleted: " + team.getId());
+				return true;
+			} catch (Exception ex) {
+				logger.info("Team delete failed: " + ex.getMessage());
+			}
+		} else {
+			logger.info("Team must not be null.");
+		}
+		return false;
 	}
 
 }
