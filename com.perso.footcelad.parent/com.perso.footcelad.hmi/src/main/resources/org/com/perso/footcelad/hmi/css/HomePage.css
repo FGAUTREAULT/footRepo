@@ -1,0 +1,37 @@
+@CHARSET "ISO-8859-1";
+
+.home{
+	font-size: 14pt;
+	width: 32px;
+	margin: 5px 5px 5px 0px;
+}
+
+.banner{
+	text-align: center;
+	font-size: 22pt;
+}
+
+.menuBtns{
+	font-size: 14pt;
+	width: 150px;
+	text-align: center;
+	margin: 5px 5px 5px 5px;
+}
+
+.otherBtns{
+	font-size: 14pt;
+	text-align: center;
+	width : 95%;
+	margin: 5px 5px 5px 5px;
+}
+
+.labels{
+	font-size: 12pt;
+	text-align: center;
+	margin: 5px 5px 5px 5px;
+}
+
+.map{
+	margin: 45px 5px 0px 5px;
+}
+
