@@ -1,4 +1,4 @@
-package org.com.perso.footcelad.hmi.client.widgets.ctgbmenu;
+package org.com.perso.footcelad.hmi.client.widgets.ctgb;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -10,11 +10,11 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
 
-public class CustomToggleMenuButton extends Composite {
+public class CustomToggleButton extends Composite {
 
 	private static final Binder binder = GWT.create(Binder.class);
 
-	interface Binder extends UiBinder<Widget, CustomToggleMenuButton> {
+	interface Binder extends UiBinder<Widget, CustomToggleButton> {
 		
 	}
 	
@@ -31,8 +31,8 @@ public class CustomToggleMenuButton extends Composite {
 	ToggleButton button;
 
 	@UiConstructor
-	public CustomToggleMenuButton(String upText, String downText, boolean isDown) {
-		CustomToggleMenuButtonResources.INSTANCE.css().ensureInjected();
+	public CustomToggleButton(String upText, String downText, boolean isDown) {
+		CustomToggleButtonResources.INSTANCE.css().ensureInjected();
 		initWidget(binder.createAndBindUi(this));
 		
 		//Init widget arguments

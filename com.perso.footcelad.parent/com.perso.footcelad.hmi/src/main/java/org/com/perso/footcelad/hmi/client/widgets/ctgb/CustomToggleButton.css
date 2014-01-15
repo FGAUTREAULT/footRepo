@@ -1,30 +1,30 @@
 @CHARSET "ISO-8859-1";
 
-@external menuBtns-up, menuBtns-down,.menuBtns-down-hovering,.menuBtns-up-hovering;
-@url menuDown menuDown;
-@url menuUp menuUp;
-.menuBtns-up {
-	font-size: 12pt;
-	width: 150px;
-	height: 25px;
-	text-align: center;
-	background-size: 100%;
-	
-	margin: 5px 5px 5px 5px;
-	background-image: menuUp;
-}
-
-.menuBtns {
+@external tgdBtns-up, tgdBtns-down,.tgdBtns-down-hovering,.tgdBtns-up-hovering;
+@url tgdDown tgdDown;
+@url tgdUp tgdUp;
+@url tgdOver tgdOver;
+.tgdBtns-up {
 	font-size: 12pt;
 	width: 150px;
 	height: 25px;
 	text-align: center;
 	background-size: 100%;
 	margin: 5px 5px 5px 5px;
-	background-image: menuUp;
+	background-image: tgdUp;
 }
 
-.menuBtns-down {
+.tgdBtns {
+	font-size: 12pt;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	background-size: 100%;
+	margin: 5px 5px 5px 5px;
+	background-image: tgdUp;
+}
+
+.tgdBtns-down {
 	font-size: 13pt;
 	font-weight: bold;
 	width: 150px;
@@ -33,11 +33,10 @@
 	background-size: 100%;
 	
 	margin: 5px 5px 5px 5px;
-	margin-left: 25px;
-	background-image: menuDown;
+	background-image: tgdDown;
 }
 
-.menuBtns-down-hovering {
+.tgdBtns-down-hovering {
 	font-size: 13pt;
 	font-weight: bold;
 	width: 150px;
@@ -46,11 +45,10 @@
 	background-size: 100%;
 	
 	margin: 5px 5px 5px 5px;
-	margin-left: 15px;
-	background-image: menuDown;
+	background-image: tgdDown;
 }
 
-.menuBtns-up-hovering {
+.tgdBtns-up-hovering {
 	font-size: 12pt;
 	width: 150px;
 	height: 25px;
@@ -58,7 +56,6 @@
 	background-size: 100%;
 	
 	margin: 5px 5px 5px 5px;
-	margin-left: 15px;
-	background-image: menuUp;
+	background-image: tgdUp;
 }
 

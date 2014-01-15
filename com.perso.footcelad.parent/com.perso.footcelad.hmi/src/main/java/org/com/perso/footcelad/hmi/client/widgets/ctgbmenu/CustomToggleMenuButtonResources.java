@@ -19,9 +19,6 @@ public interface CustomToggleMenuButtonResources extends ClientBundle {
 	@Source("org/com/perso/footcelad/hmi/imgs/menuBtnDown.png")
 	DataResource menuDown();
 	
-	@Source("org/com/perso/footcelad/hmi/imgs/menuBtnOver.png")
-	DataResource menuOver();
-
 	// CSS
 	public interface CustomToggleMenuButtonCss extends CssResource {
 		
