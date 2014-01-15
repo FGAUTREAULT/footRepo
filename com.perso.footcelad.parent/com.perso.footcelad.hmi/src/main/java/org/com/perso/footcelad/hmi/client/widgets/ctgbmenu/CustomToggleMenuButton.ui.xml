@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:with type="org.com.perso.footcelad.hmi.client.widgets.CustomToggleMenuButtonResources"
+	<ui:with type="org.com.perso.footcelad.hmi.client.widgets.ctgbmenu.CustomToggleMenuButtonResources"
 		field="resources"></ui:with>
 
 	<ui:with type="org.com.perso.footcelad.hmi.client.Messages"

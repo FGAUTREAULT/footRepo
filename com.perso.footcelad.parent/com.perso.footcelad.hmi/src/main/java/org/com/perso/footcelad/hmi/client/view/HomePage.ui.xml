@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:menuButtons="urn:import:org.com.perso.footcelad.hmi.client.widgets">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:menuButtons="urn:import:org.com.perso.footcelad.hmi.client.widgets.ctgbmenu">
 
 	<ui:with type="org.com.perso.footcelad.hmi.client.view.HomePageResources"
 		field="resources"></ui:with>
@@ -16,7 +16,9 @@
 	
 	.dispo-style {
 		margin: 5px 5px 5px 5px;
-		font-size: 14pt;
+		font-size: 13pt;
+		height: 25px;
+		font-weight: bold;
 		text-align: center;
 	}
 	

@@ -1,4 +1,4 @@
-package org.com.perso.footcelad.hmi.client.widgets;
+package org.com.perso.footcelad.hmi.client.widgets.ctgbmenu;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAttribute;
