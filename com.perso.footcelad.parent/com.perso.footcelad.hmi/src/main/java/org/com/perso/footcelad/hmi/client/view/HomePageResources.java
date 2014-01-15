@@ -3,6 +3,7 @@ package org.com.perso.footcelad.hmi.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.DataResource;
 import com.google.gwt.resources.client.ImageResource;
 
 public interface HomePageResources extends ClientBundle {
@@ -11,34 +12,42 @@ public interface HomePageResources extends ClientBundle {
 
 	@Source("org/com/perso/footcelad/hmi/css/HomePage.css")
 	public HomePageCss css();
-	
-	
-	//IMAGES
-	//Profile
+
+	// IMAGES
+	// Profile
 	@Source("org/com/perso/footcelad/hmi/imgs/profile.png")
 	ImageResource profile();
+
 	@Source("org/com/perso/footcelad/hmi/imgs/profile-over.png")
 	ImageResource profileOver();
-	
-	//Disconnect
+
+	// Disconnect
 	@Source("org/com/perso/footcelad/hmi/imgs/disconnect.png")
 	ImageResource disconnect();
+
 	@Source("org/com/perso/footcelad/hmi/imgs/disconnect-over.png")
 	ImageResource disconnectOver();
-	
-	//MAP
+
+	// MAP
 	@Source("org/com/perso/footcelad/hmi/imgs/map.png")
 	ImageResource map();
 
-	
-	
-	//CSS
+	// MENU
+	@Source("org/com/perso/footcelad/hmi/imgs/menuBtnUP.png")
+	DataResource menuUp();
+	@Source("org/com/perso/footcelad/hmi/imgs/menuBtnDown.png")
+	DataResource menuDown();
+
+	// CSS
 	public interface HomePageCss extends CssResource {
 		String home();
+
 		String banner();
-		String menuBtns();
+
 		String labels();
+
 		String map();
+
 		String otherBtns();
 	}
 }

@@ -1,0 +1,63 @@
+@CHARSET "ISO-8859-1";
+
+@external menuBtns-up, menuBtns-down,.menuBtns-down-hovering,.menuBtns-up-hovering;
+@url menuDown menuDown;
+@url menuUp menuUp;
+@url menuOver menuOver;
+.menuBtns-up {
+	font-size: 14pt;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	background-size: 100%;
+	
+	margin: 5px 5px 5px 5px;
+	background-image: menuUp;
+}
+
+.menuBtns {
+	font-size: 14pt;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	background-size: 100%;
+	margin: 5px 5px 5px 5px;
+	background-image: menuUp;
+}
+
+.menuBtns-down {
+	font-size: 14pt;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	background-size: 100%;
+	
+	margin: 5px 5px 5px 5px;
+	margin-left: 25px;
+	background-image: menuDown;
+}
+
+.menuBtns-down-hovering {
+	font-size: 14pt;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	background-size: 100%;
+	
+	margin: 5px 5px 5px 5px;
+	margin-left: 15px;
+	background-image: menuDown;
+}
+
+.menuBtns-up-hovering {
+	font-size: 14pt;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+	background-size: 100%;
+	
+	margin: 5px 5px 5px 5px;
+	margin-left: 15px;
+	background-image: menuUp;
+}
+

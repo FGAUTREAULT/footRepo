@@ -1,10 +1,8 @@
 package org.com.perso.footcelad.hmi.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.PushButton;
@@ -29,12 +27,7 @@ public class HomePage extends Composite implements IHomePage {
 
 		setupTable();
 		
-		setupButtons();
-
 		initWidget(uiBinder.createAndBindUi(this));
-	}
-
-	private void setupButtons() {
 	}
 
 	private void setupTable() {

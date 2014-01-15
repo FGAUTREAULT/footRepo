@@ -1,5 +1,4 @@
 @CHARSET "ISO-8859-1";
-
 .home{
 	font-size: 14pt;
 	width: 32px;
@@ -11,12 +10,7 @@
 	font-size: 22pt;
 }
 
-.menuBtns{
-	font-size: 14pt;
-	width: 150px;
-	text-align: center;
-	margin: 5px 5px 5px 5px;
-}
+@url menuUp menuUp;
 
 .otherBtns{
 	font-size: 14pt;
