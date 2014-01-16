@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:menuButtons="urn:import:org.com.perso.footcelad.hmi.client.widgets.ctgbmenu"
 	xmlns:tgdButtons="urn:import:org.com.perso.footcelad.hmi.client.widgets.ctgb"
-	xmlns:btnGroup="com.git">
+	xmlns:btnGroup="urn:import:org.com.perso.footcelad.hmi.client.widgets.btngrouppanel">
 
 	<ui:with type="org.com.perso.footcelad.hmi.client.view.HomePageResources"
 		field="resources"></ui:with>
@@ -104,41 +104,40 @@
 		</g:center>
 
 		<g:west size="200">
-			<g:VerticalPanel width="100%" height="100%">
+			<btnGroup:ButtonGroupPanel width="100%">
 
 				<!-- STUBB -->
-				<g:cell height="26px" horizontalAlignment="ALIGN_LEFT"
-					verticalAlignment="ALIGN_BOTTOM">
-					<g:Label></g:Label>
-				</g:cell>
+				<!-- <g:cell height="26px" horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_BOTTOM"> 
+					<g:Label></g:Label> </g:cell> <g:cell height="25px" horizontalAlignment="ALIGN_LEFT" 
+					verticalAlignment="ALIGN_BOTTOM"> <menuButtons:CustomToggleMenuButton ui:field="championshipBtn" 
+					isDown="false" upText="{messages.championshipBtn}" downText="{messages.championshipBtn}"></menuButtons:CustomToggleMenuButton> 
+					</g:cell> <g:cell horizontalAlignment="ALIGN_LEFT"> <menuButtons:CustomToggleMenuButton 
+					ui:field="matchsBtn" isDown="true" upText="{messages.matchsBtn}" downText="{messages.matchsBtn}"></menuButtons:CustomToggleMenuButton> 
+					</g:cell> <g:cell horizontalAlignment="ALIGN_LEFT"> <menuButtons:CustomToggleMenuButton 
+					ui:field="teamsBtn" isDown="false" upText="{messages.teamsBtn}" downText="{messages.teamsBtn}"></menuButtons:CustomToggleMenuButton> 
+					</g:cell> <g:cell horizontalAlignment="ALIGN_LEFT"> <menuButtons:CustomToggleMenuButton 
+					ui:field="playersBtn" isDown="false" upText="{messages.playersBtn}" downText="{messages.playersBtn}"></menuButtons:CustomToggleMenuButton> 
+					</g:cell> <g:cell height="100%" horizontalAlignment="ALIGN_LEFT"> <menuButtons:CustomToggleMenuButton 
+					ui:field="stadiumsBtn" isDown="false" upText="{messages.stadiumsBtn}" downText="{messages.stadiumsBtn}"></menuButtons:CustomToggleMenuButton> 
+					</g:cell> -->
 
-				<g:cell height="25px" horizontalAlignment="ALIGN_LEFT"
-					verticalAlignment="ALIGN_BOTTOM">
-					<menuButtons:CustomToggleMenuButton
-						ui:field="championshipBtn" isDown="false" upText="{messages.championshipBtn}"
-						downText="{messages.championshipBtn}"></menuButtons:CustomToggleMenuButton>
-				</g:cell>
-				<g:cell horizontalAlignment="ALIGN_LEFT">
-					<menuButtons:CustomToggleMenuButton
-						ui:field="matchsBtn" isDown="true" upText="{messages.matchsBtn}"
-						downText="{messages.matchsBtn}"></menuButtons:CustomToggleMenuButton>
-				</g:cell>
-				<g:cell horizontalAlignment="ALIGN_LEFT">
-					<menuButtons:CustomToggleMenuButton
-						ui:field="teamsBtn" isDown="false" upText="{messages.teamsBtn}"
-						downText="{messages.teamsBtn}"></menuButtons:CustomToggleMenuButton>
-				</g:cell>
-				<g:cell horizontalAlignment="ALIGN_LEFT">
-					<menuButtons:CustomToggleMenuButton
-						ui:field="playersBtn" isDown="false" upText="{messages.playersBtn}"
-						downText="{messages.playersBtn}"></menuButtons:CustomToggleMenuButton>
-				</g:cell>
-				<g:cell height="100%" horizontalAlignment="ALIGN_LEFT">
-					<menuButtons:CustomToggleMenuButton
-						ui:field="stadiumsBtn" isDown="false" upText="{messages.stadiumsBtn}"
-						downText="{messages.stadiumsBtn}"></menuButtons:CustomToggleMenuButton>
-				</g:cell>
-			</g:VerticalPanel>
+				<g:Label height="26px"></g:Label>
+				<menuButtons:CustomToggleMenuButton
+					ui:field="championshipBtn" isDown="false" upText="{messages.championshipBtn}"
+					downText="{messages.championshipBtn}"></menuButtons:CustomToggleMenuButton>
+				<menuButtons:CustomToggleMenuButton
+					ui:field="matchsBtn" isDown="true" upText="{messages.matchsBtn}"
+					downText="{messages.matchsBtn}"></menuButtons:CustomToggleMenuButton>
+				<menuButtons:CustomToggleMenuButton
+					ui:field="teamsBtn" isDown="false" upText="{messages.teamsBtn}"
+					downText="{messages.teamsBtn}"></menuButtons:CustomToggleMenuButton>
+				<menuButtons:CustomToggleMenuButton
+					ui:field="playersBtn" isDown="false" upText="{messages.playersBtn}"
+					downText="{messages.playersBtn}"></menuButtons:CustomToggleMenuButton>
+				<menuButtons:CustomToggleMenuButton
+					ui:field="stadiumsBtn" isDown="false" upText="{messages.stadiumsBtn}"
+					downText="{messages.stadiumsBtn}"></menuButtons:CustomToggleMenuButton>
+			</btnGroup:ButtonGroupPanel>
 		</g:west>
 
 		<g:east size="200">

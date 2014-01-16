@@ -1,8 +1,15 @@
 package org.com.perso.footcelad.hmi.client.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.com.perso.footcelad.hmi.client.widgets.ctgbmenu.CustomToggleMenuButton;
+
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.PushButton;
@@ -18,7 +25,7 @@ public class HomePage extends Composite implements IHomePage {
 
 	@UiField
 	PushButton home;
-
+	
 	@UiField(provided = true)
 	FlexTable table;
 
@@ -43,8 +50,8 @@ public class HomePage extends Composite implements IHomePage {
 
 	}
 
-//	@UiHandler("home")
-//	public void onHomeButtonClick(ClickEvent event) {
-//		home.setText("yes");
+//	@UiHandler("championshipBtn")
+//	public void onChampionshipButtonClick(ClickEvent event) {
+//		setUpOthers(championshipBtn.getTitle());
 //	}
 }
