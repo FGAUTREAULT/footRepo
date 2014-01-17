@@ -4,12 +4,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.event.MapClickHandler;
-import com.google.gwt.maps.client.event.MapClickHandler.MapClickEvent;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -45,7 +43,13 @@ public class HomePage extends Composite implements IHomePage {
 		map.setSize("150px", "240px");
 		map.addControl(new LargeMapControl());
 		map.addOverlay(new Marker(toulouse));
-
+		map.addMapClickHandler(new MapClickHandler() {
+			
+			@Override
+			public void onClick(MapClickEvent event) {
+				Window.open("https://maps.google.fr/maps?saddr=43.612477,1.382804&daddr=43.605447,1.424046", "_blank", "");
+			}
+		});
 	}
 
 	private void setupTable() {
@@ -61,9 +65,9 @@ public class HomePage extends Composite implements IHomePage {
 
 	}
 
-	@UiHandler("map")
-	@Override
-	public void onMapClick(MapClickEvent event) {
-		Window.open("https://maps.google.fr/maps?q=maps&ie=UTF-8&ei=NgbZUsP-Iams0QXy1oCgBw&ved=0CAoQ_AUoAg", "_blank", "");
-	}
+//	@UiHandler("map")
+//	@Override
+//	public void onMapClick(MapClickEvent event) {
+//		Window.open("https://maps.google.fr/maps?q=maps&ie=UTF-8&ei=NgbZUsP-Iams0QXy1oCgBw&ved=0CAoQ_AUoAg", "_blank", "");
+//	}
 }
