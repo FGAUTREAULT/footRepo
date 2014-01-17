@@ -59,6 +59,11 @@
 			<artifactId>gwt-bootstrap</artifactId>
 			<version>2.2.1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.gwt.google-apis</groupId>
+			<artifactId>gwt-maps</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

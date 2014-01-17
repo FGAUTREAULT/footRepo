@@ -1,15 +1,16 @@
 package org.com.perso.footcelad.hmi.client.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.com.perso.footcelad.hmi.client.widgets.ctgbmenu.CustomToggleMenuButton;
-
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.control.LargeMapControl;
+import com.google.gwt.maps.client.event.MapClickHandler;
+import com.google.gwt.maps.client.event.MapClickHandler.MapClickEvent;
+import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.PushButton;
@@ -25,16 +26,26 @@ public class HomePage extends Composite implements IHomePage {
 
 	@UiField
 	PushButton home;
-	
+
 	@UiField(provided = true)
 	FlexTable table;
+
+	@UiField
+	MapWidget map;
 
 	public HomePage() {
 		HomePageResources.INSTANCE.css().ensureInjected();
 
 		setupTable();
-		
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		LatLng toulouse = LatLng.newInstance(43.597518,1.445468);
+		map.setCenter(toulouse);
+		map.setZoomLevel(11);
+		map.setSize("150px", "240px");
+		map.addControl(new LargeMapControl());
+		map.addOverlay(new Marker(toulouse));
+
 	}
 
 	private void setupTable() {
@@ -50,8 +61,9 @@ public class HomePage extends Composite implements IHomePage {
 
 	}
 
-//	@UiHandler("championshipBtn")
-//	public void onChampionshipButtonClick(ClickEvent event) {
-//		setUpOthers(championshipBtn.getTitle());
-//	}
+	@UiHandler("map")
+	@Override
+	public void onMapClick(MapClickEvent event) {
+		Window.open("https://maps.google.fr/maps?q=maps&ie=UTF-8&ei=NgbZUsP-Iams0QXy1oCgBw&ved=0CAoQ_AUoAg", "_blank", "");
+	}
 }

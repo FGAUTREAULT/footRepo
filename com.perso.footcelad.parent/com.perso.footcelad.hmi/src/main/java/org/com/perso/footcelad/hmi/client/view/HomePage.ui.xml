@@ -3,7 +3,9 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:menuButtons="urn:import:org.com.perso.footcelad.hmi.client.widgets.ctgbmenu"
 	xmlns:tgdButtons="urn:import:org.com.perso.footcelad.hmi.client.widgets.ctgb"
-	xmlns:btnGroup="urn:import:org.com.perso.footcelad.hmi.client.widgets.btngrouppanel">
+	xmlns:btnGroup="urn:import:org.com.perso.footcelad.hmi.client.widgets.btngrouppanel"
+	xmlns:gmaps="urn:import:com.google.gwt.maps.client"
+	>
 
 	<ui:with type="org.com.perso.footcelad.hmi.client.view.HomePageResources"
 		field="resources"></ui:with>
@@ -169,7 +171,8 @@
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_CENTER"
 							verticalAlignment="ALIGN_MIDDLE" width="150px" height="160px">
-							<g:Image resource="{resources.map}" styleName="{resources.css.map}"></g:Image>
+							<!-- <g:Image resource="{resources.map}" styleName="{resources.css.map}"></g:Image> -->
+							<gmaps:MapWidget ui:field='map' styleName="{resources.css.map}" /> 
 						</g:cell>
 						<g:cell horizontalAlignment="ALIGN_LEFT">
 							<g:Label ui:field="stadiumGameLbl" styleName="{resources.css.labels}"
