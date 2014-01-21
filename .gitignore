@@ -1,6 +1,4 @@
 target/
-.classpath
-.settings/
 
 package-info.java
 *.class
@@ -8,3 +6,8 @@ bin/
 
 .gwt/
 Thumbs.db
+/com.perso.footcelad.parent/.settings
+/com.perso.footcelad.core/.settings
+/com.perso.footcelad.hmi/.settings
+/com.perso.footcelad.parent/com.perso.footcelad.core/.classpath
+/com.perso.footcelad.parent/com.perso.footcelad.hmi/.classpath
